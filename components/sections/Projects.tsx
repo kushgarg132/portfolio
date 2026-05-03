@@ -4,7 +4,17 @@ import { motion } from "framer-motion";
 import { useInView } from "@/hooks/useInView";
 import { Github, ExternalLink } from "lucide-react";
 
-const projects = [
+const projects: Array<{
+  title: string;
+  subtitle: string;
+  description: string;
+  stack: string[];
+  badges: string[];
+  github: string;
+  live?: string;
+  accentColor: string;
+  featured?: boolean;
+}> = [
   {
     title: "NeoTrade AI",
     subtitle: "Multi-Agent Stock Analysis Platform",
@@ -17,12 +27,13 @@ const projects = [
   },
   {
     title: "Betrix",
-    subtitle: "Real-Time Multiplayer Poker Platform",
+    subtitle: "AI-Powered Multiplayer Poker Platform",
     description:
-      "Full-stack poker platform with WebSocket game state sync, atomic wallet engine, JWT authentication via Spring Security, and real-time bidding logic.",
-    stack: ["Spring Boot 3.4", "MongoDB", "WebSocket", "React"],
-    badges: ["Live", "Real-time", "Java"],
+      "Full-stack Texas Hold'em platform with Gemini AI bot opponents, GraphQL subscriptions + WebSocket for real-time game state sync, hand evaluation engine, atomic wallet transactions, game replay analysis, and Swagger/OpenAPI docs.",
+    stack: ["Java 21", "Spring Boot 3.4", "GraphQL", "Gemini AI", "React", "Apollo Client"],
+    badges: ["Live", "AI", "Real-time", "Java"],
     github: "https://github.com/kushgarg132/Betrix",
+    live: "https://betrix-b3c24.web.app",
     accentColor: "#007A87",
     featured: true,
   },
@@ -127,14 +138,14 @@ export default function Projects() {
                     <span>Source</span>
                   </a>
                   <a
-                    href={project.github}
+                    href={project.live ?? project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#007A87] transition-colors duration-200 cursor-pointer ml-auto"
                     aria-label={`View ${project.title}`}
                   >
                     <ExternalLink size={15} />
-                    <span>View</span>
+                    <span>{project.live ? "Live Demo" : "View"}</span>
                   </a>
                 </div>
               </div>
