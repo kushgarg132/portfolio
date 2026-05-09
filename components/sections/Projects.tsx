@@ -23,6 +23,7 @@ const projects: Array<{
     stack: ["Python", "FastAPI", "LangGraph", "Redis", "MongoDB", "Gemini Pro"],
     badges: ["AI", "Multi-Agent", "LLM"],
     github: "https://github.com/kushgarg132/AI_Stock_Investor",
+    live: "https://ai-stock-investor.vercel.app",
     accentColor: "#7c3aed",
   },
   {
