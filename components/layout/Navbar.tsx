@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -16,12 +16,43 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { theme, toggle } = useTheme();
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sectionIds = navLinks.map((l) => l.href.slice(1));
+    // Track which sections are currently visible and pick the topmost one
+    const visibleSections = new Set<string>();
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.add(entry.target.id);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+        // Pick the first section in nav order that is visible
+        const active = sectionIds.find((id) => visibleSections.has(id));
+        if (active) setActiveSection(active);
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observerRef.current!.observe(el);
+    });
+
+    return () => observerRef.current?.disconnect();
   }, []);
 
   const handleNav = (href: string) => {
@@ -51,15 +82,25 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNav(link.href)}
-              className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-[#007A87] transition-colors duration-200 rounded-md hover:bg-[#007A87]/8 cursor-pointer"
-            >
-              {link.label}
-            </button>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.slice(1);
+            return (
+              <button
+                key={link.href}
+                onClick={() => handleNav(link.href)}
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 cursor-pointer ${
+                  isActive
+                    ? "text-[#007A87] bg-[#007A87]/10"
+                    : "text-muted-foreground hover:text-[#007A87] hover:bg-[#007A87]/8"
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <span className="block h-0.5 mt-0.5 rounded-full bg-[#007A87]" />
+                )}
+              </button>
+            );
+          })}
         </div>
 
         {/* Right side */}
@@ -93,15 +134,23 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border px-4 pb-4 pt-2">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNav(link.href)}
-              className="block w-full text-left px-3 py-3 text-sm font-medium text-muted-foreground hover:text-[#007A87] transition-colors cursor-pointer border-b border-border/50 last:border-0"
-            >
-              {link.label}
-            </button>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.slice(1);
+            return (
+              <button
+                key={link.href}
+                onClick={() => handleNav(link.href)}
+                className={`block w-full text-left px-3 py-3 text-sm font-medium transition-colors cursor-pointer border-b border-border/50 last:border-0 ${
+                  isActive
+                    ? "text-[#007A87] font-semibold"
+                    : "text-muted-foreground hover:text-[#007A87]"
+                }`}
+              >
+                {isActive && <span className="mr-1.5">›</span>}
+                {link.label}
+              </button>
+            );
+          })}
           <a
             href="/KushGarg_Resume.pdf"
             download
