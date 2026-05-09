@@ -15,7 +15,7 @@ const skillGroups = [
     icon: <Layers size={20} />,
     title: "Frameworks",
     color: "#0891b2",
-    skills: ["Spring Boot", "FastAPI", "Node.js", "React", "Next.js 14"],
+    skills: ["Spring Boot", "Spring Security", "Spring WebSocket", "Spring Cloud Gateway", "FastAPI", "Node.js", "React", "Next.js 14"],
   },
   {
     icon: <Database size={20} />,
@@ -33,7 +33,7 @@ const skillGroups = [
     icon: <Server size={20} />,
     title: "Infrastructure",
     color: "#047857",
-    skills: ["Docker", "Kafka", "Azure DevOps", "GitHub Actions", "CI/CD"],
+    skills: ["Docker", "Kafka", "Azure DevOps", "GitHub Actions", "CI/CD", "Agile", "Scrum"],
   },
   {
     icon: <Globe size={20} />,

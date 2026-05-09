@@ -6,7 +6,7 @@ import { MapPin, Calendar } from "lucide-react";
 
 const experiences = [
   {
-    role: "Software Engineer II",
+    role: "Software Engineer",
     company: "StoneX Group",
     location: "Pune, IN",
     period: "Aug 2024 – Present",

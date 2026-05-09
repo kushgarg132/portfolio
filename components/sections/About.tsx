@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "@/hooks/useInView";
 
 const stats = [
-  { value: "1.5+", label: "Years Experience" },
+  { value: "2+", label: "Years Experience" },
   { value: "$600M", label: "Impact (XPAY)" },
   { value: "7+", label: "SWIFT Message Types" },
   { value: "3", label: "Live Projects" },
@@ -37,7 +37,7 @@ export default function About() {
             className="space-y-5"
           >
             <p className="text-muted-foreground text-lg leading-relaxed">
-              I&apos;m a Software Engineer II at{" "}
+              I&apos;m a Software Engineer at{" "}
               <span className="text-[#007A87] font-medium">StoneX Group</span>, where I build
               mission-critical payment infrastructure connecting global financial systems. My work
               spans the full lifecycle of SWIFT messaging — from transforming Treasury Management
@@ -95,11 +95,11 @@ export default function About() {
               <div className="mt-6 pt-6 border-t border-border space-y-3">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-[#007A87]" />
-                  Software Engineer II · StoneX Group
+                  Software Engineer · StoneX Group
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-[#007A87]" />
-                  B.E. Computer Engineering · Pune Institute
+                  B.Tech CS (AI &amp; ML) · Symbiosis Institute of Technology, Pune
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-[#007A87]" />
