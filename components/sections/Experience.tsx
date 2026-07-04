@@ -6,17 +6,18 @@ import { MapPin, Calendar } from "lucide-react";
 
 const experiences = [
   {
-    role: "Software Engineer",
+    role: "Software Engineer II",
     company: "StoneX Group",
     location: "Pune, IN",
     period: "Aug 2024 – Present",
     current: true,
     bullets: [
-      "Designed end-to-end Funding as a Service (FAAS) pipeline: TMSJson from Treasury Management Systems → ISO 20022 (pacs.008, pacs.009, pain.001) → SWIFT network → ACK/NACK",
-      "Built SWIFT message processing layer (MT900, MT910, MT942, CAMT.053, CAMT.054) bridging legacy MT and modern MX standards",
-      "Co-drove XPAY to production (Feb 2025): internal payment platform processing requests from client-facing CONNECT app and direct broker/ops initiations — enabling $600M in savings",
-      "Proposed AI cost-reduction architecture: GraphDB + VectorDB + MCP with CI/CD to reduce LLM token consumption",
-      "Led team to 2nd place, StoneX India Hackathon (Nov 2025): AI ops investigation tool with case summarization, multilingual chatbot, and interactive dashboard",
+      "Own end-to-end delivery of the Funding as a Service (FAAS) pipeline — centralized payment platform serving all StoneX entities with full ACK/NACK lifecycle management",
+      "Built ISO 20022 message generation layer (pacs.008, pacs.009, pain.001) ingesting TMSJson payloads from Treasury Management Systems and delivering to the SWIFT network",
+      "Engineered SWIFT message processing layer supporting 7+ message types across legacy MT (MT900, MT910, MT942) and modern MX (CAMT.053, CAMT.054) formats",
+      "Co-drove XPAY to production (Feb 2025) — processing cross-border payments from the CONNECT app and broker initiations, enabling $600M in operational savings",
+      "Proposed AI cost-reduction architecture using GraphDB + VectorDB + MCP with CI/CD automation to eliminate redundant LLM token consumption",
+      "Led team of 5 to 2nd place at StoneX India Hackathon (Nov 2025) — built an AI ops tool with multilingual chatbot and interactive dashboard for operations users",
     ],
     tags: ["Spring Boot", "Java", "SWIFT ISO 20022", "Microservices", "Azure DevOps"],
   },
@@ -27,7 +28,7 @@ const experiences = [
     period: "Jan 2024 – Jul 2024",
     current: false,
     bullets: [
-      "Core contributor to XPAY — Spring Boot APIs, transaction logic, compliance hooks, and audit trails",
+      "Core contributor to XPAY — built Spring Boot REST APIs, transaction logic, compliance hooks, and audit trails forming the foundation of its production payment architecture",
       "Delivered CI/CD pipelines on Azure DevOps in coordination with DevOps and InfoSec teams",
     ],
     tags: ["Spring Boot", "Java", "CI/CD", "Azure DevOps"],

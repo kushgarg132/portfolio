@@ -95,7 +95,7 @@ export default function About() {
               <div className="mt-6 pt-6 border-t border-border space-y-3">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-[#007A87]" />
-                  Software Engineer · StoneX Group
+                  Software Engineer II · StoneX Group
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-[#007A87]" />
@@ -103,7 +103,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-[#007A87]" />
-                  Pune, India · Open to Remote
+                  Pune, India · Open to Relocate
                 </div>
               </div>
             </div>
