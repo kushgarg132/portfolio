@@ -74,9 +74,9 @@ export default function Navbar() {
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className="font-bold text-xl tracking-tight"
+          className="font-bold text-xl tracking-tight py-2"
         >
-          <span className="text-[#007A87]">KG</span>
+          <span className="text-teal-ink">KG</span>
           <span className="text-foreground">.</span>
         </a>
 
@@ -90,13 +90,13 @@ export default function Navbar() {
                 onClick={() => handleNav(link.href)}
                 className={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 cursor-pointer ${
                   isActive
-                    ? "text-[#007A87] bg-[#007A87]/10"
-                    : "text-muted-foreground hover:text-[#007A87] hover:bg-[#007A87]/8"
+                    ? "text-teal-ink bg-teal/10"
+                    : "text-muted-foreground hover:text-teal-ink hover:bg-teal/8"
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="block h-0.5 mt-0.5 rounded-full bg-[#007A87]" />
+                  <span className="block h-0.5 mt-0.5 rounded-full bg-teal" />
                 )}
               </button>
             );
@@ -108,7 +108,7 @@ export default function Navbar() {
           <button
             onClick={toggle}
             aria-label="Toggle theme"
-            className="p-2 rounded-lg text-muted-foreground hover:text-[#007A87] hover:bg-[#007A87]/10 transition-all duration-200 cursor-pointer"
+            className="p-3.5 rounded-lg text-muted-foreground hover:text-teal-ink hover:bg-teal/10 transition-all duration-200 cursor-pointer"
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -116,7 +116,7 @@ export default function Navbar() {
           <a
             href="/KushGarg_Resume.pdf"
             download
-            className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-[#007A87] text-[#007A87] hover:bg-[#007A87] hover:text-white transition-all duration-200"
+            className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-teal text-teal-ink hover:bg-teal hover:text-white transition-all duration-200"
           >
             Resume
           </a>
@@ -124,7 +124,9 @@ export default function Navbar() {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
-            className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-[#007A87] transition-colors cursor-pointer"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            className="md:hidden p-3 rounded-lg text-muted-foreground hover:text-teal-ink transition-colors cursor-pointer"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -133,7 +135,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border px-4 pb-4 pt-2">
+        <div id="mobile-menu" className="md:hidden bg-background/95 backdrop-blur-md border-b border-border px-4 pb-4 pt-2">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.slice(1);
             return (
@@ -142,8 +144,8 @@ export default function Navbar() {
                 onClick={() => handleNav(link.href)}
                 className={`block w-full text-left px-3 py-3 text-sm font-medium transition-colors cursor-pointer border-b border-border/50 last:border-0 ${
                   isActive
-                    ? "text-[#007A87] font-semibold"
-                    : "text-muted-foreground hover:text-[#007A87]"
+                    ? "text-teal-ink font-semibold"
+                    : "text-muted-foreground hover:text-teal-ink"
                 }`}
               >
                 {isActive && <span className="mr-1.5">›</span>}
@@ -154,7 +156,7 @@ export default function Navbar() {
           <a
             href="/KushGarg_Resume.pdf"
             download
-            className="mt-3 flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-[#007A87] text-[#007A87] hover:bg-[#007A87] hover:text-white transition-all duration-200"
+            className="mt-3 flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-teal text-teal-ink hover:bg-teal hover:text-white transition-all duration-200"
           >
             Download Resume
           </a>

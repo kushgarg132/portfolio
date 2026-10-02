@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-center sm:text-left">
           <p className="font-bold text-lg">
-            <span className="text-[#007A87]">KG</span>
+            <span className="text-teal-ink">KG</span>
             <span className="text-foreground">.</span>
           </p>
           <p className="text-xs text-muted-foreground mt-1">
@@ -28,7 +28,7 @@ export default function Footer() {
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
               aria-label={label}
-              className="p-2 rounded-lg text-muted-foreground hover:text-[#007A87] hover:bg-[#007A87]/10 transition-all duration-200 cursor-pointer"
+              className="p-3.5 rounded-lg text-muted-foreground hover:text-teal-ink hover:bg-teal/10 transition-all duration-200 cursor-pointer"
             >
               {icon}
             </a>

@@ -23,7 +23,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-3 mb-12"
         >
-          <span className="text-sm font-mono text-[#007A87] tracking-widest uppercase">01.</span>
+          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">01.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">About Me</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
         </motion.div>
@@ -31,28 +31,28 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Text */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
             className="space-y-5"
           >
             <p className="text-muted-foreground text-lg leading-relaxed">
               I&apos;m a Software Engineer at{" "}
-              <span className="text-[#007A87] font-medium">StoneX Group</span>, where I build
+              <span className="text-teal-ink font-medium">StoneX Group</span>, where I build
               mission-critical payment infrastructure connecting global financial systems. My work
               spans the full lifecycle of SWIFT messaging — from transforming Treasury Management
               System payloads into ISO 20022 standards to processing real-time acknowledgements.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
               I co-drove{" "}
-              <span className="text-[#007A87] font-medium">XPAY</span> to production in February
+              <span className="text-teal-ink font-medium">XPAY</span> to production in February
               2025 — an internal payment platform that now enables{" "}
               <span className="text-foreground font-semibold">$600M in savings</span>, processing
               requests from client-facing apps and direct broker initiations across the globe.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
               Outside of fintech infrastructure, I build{" "}
-              <span className="text-[#007A87] font-medium">multi-agent AI systems</span> — LangGraph
+              <span className="text-teal-ink font-medium">multi-agent AI systems</span> — LangGraph
               agent pipelines, real-time distributed platforms, and microservices
               architectures. I believe elegant engineering lives at the intersection of correctness,
               performance, and craft.
@@ -62,7 +62,7 @@ export default function About() {
               {["Java", "Spring Boot", "SWIFT ISO 20022", "LangGraph", "Python", "Microservices"].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full text-sm font-medium bg-[#007A87]/10 text-[#007A87] border border-[#007A87]/20"
+                  className="px-3 py-1 rounded-full text-sm font-medium bg-teal/10 text-teal-ink border border-teal/20"
                 >
                   {tag}
                 </span>
@@ -72,8 +72,8 @@ export default function About() {
 
           {/* Stats card */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
             <div className="rounded-2xl border border-border bg-card p-8 card-hover">
@@ -86,7 +86,7 @@ export default function About() {
                     transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                     className="text-center p-4 rounded-xl bg-background border border-border/60"
                   >
-                    <div className="text-3xl font-bold text-[#007A87] mb-1">{value}</div>
+                    <div className="text-3xl font-bold text-teal-ink mb-1">{value}</div>
                     <div className="text-sm text-muted-foreground font-medium">{label}</div>
                   </motion.div>
                 ))}
@@ -94,15 +94,15 @@ export default function About() {
 
               <div className="mt-6 pt-6 border-t border-border space-y-3">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-[#007A87]" />
+                  <span className="w-2 h-2 rounded-full bg-teal" />
                   Software Engineer II · StoneX Group
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-[#007A87]" />
+                  <span className="w-2 h-2 rounded-full bg-teal" />
                   B.Tech CS (AI &amp; ML) · Symbiosis Institute of Technology, Pune
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-[#007A87]" />
+                  <span className="w-2 h-2 rounded-full bg-teal" />
                   Pune, India · Open to Remote &amp; Relocation
                 </div>
               </div>

@@ -56,7 +56,7 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-3 mb-12"
         >
-          <span className="text-sm font-mono text-[#007A87] tracking-widest uppercase">02.</span>
+          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">02.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Skills</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
         </motion.div>

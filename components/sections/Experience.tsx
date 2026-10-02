@@ -48,7 +48,7 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-3 mb-12"
         >
-          <span className="text-sm font-mono text-[#007A87] tracking-widest uppercase">03.</span>
+          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">03.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Experience</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
         </motion.div>
@@ -62,8 +62,8 @@ export default function Experience() {
             {experiences.map((exp, i) => (
               <motion.div
                 key={`${exp.role}-${exp.period}`}
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 className="sm:pl-10 relative"
               >
@@ -71,7 +71,7 @@ export default function Experience() {
                 <div
                   className={`absolute hidden sm:flex left-0 w-4 h-4 rounded-full border-2 items-center justify-center top-1.5 ${
                     exp.current
-                      ? "bg-[#007A87] border-[#007A87]"
+                      ? "bg-teal border-teal"
                       : "bg-background border-border"
                   }`}
                   style={{ left: 0 }}
@@ -88,12 +88,12 @@ export default function Experience() {
                       <div className="flex items-center gap-2">
                         <h3 className="text-lg font-bold text-foreground">{exp.role}</h3>
                         {exp.current && (
-                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#007A87]/10 text-[#007A87] border border-[#007A87]/20">
+                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-teal/10 text-teal-ink border border-teal/20">
                             Current
                           </span>
                         )}
                       </div>
-                      <p className="text-[#007A87] font-semibold mt-0.5">{exp.company}</p>
+                      <p className="text-teal-ink font-semibold mt-0.5">{exp.company}</p>
                     </div>
                     <div className="text-right text-sm text-muted-foreground">
                       <div className="flex items-center gap-1.5 justify-end">
@@ -111,7 +111,7 @@ export default function Experience() {
                   <ul className="space-y-2.5 mb-5">
                     {exp.bullets.map((b, bi) => (
                       <li key={bi} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
-                        <span className="text-[#007A87] mt-1 flex-shrink-0">▸</span>
+                        <span className="text-teal-ink mt-1 flex-shrink-0">▸</span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -122,7 +122,7 @@ export default function Experience() {
                     {exp.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-1 rounded-lg text-xs font-medium bg-[#007A87]/8 text-[#007A87] border border-[#007A87]/15"
+                        className="px-2.5 py-1 rounded-lg text-xs font-medium bg-teal/8 text-teal-ink border border-teal/15"
                       >
                         {tag}
                       </span>

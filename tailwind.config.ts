@@ -26,11 +26,12 @@ const config: Config = {
           DEFAULT: "#007A87",
           light: "#00A3B4",
           dark: "#005F6B",
+          ink: "rgb(var(--teal-ink) / <alpha-value>)",
         },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "Fira Code", "monospace"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -50,7 +50,7 @@ export default function Achievements() {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-3 mb-12"
         >
-          <span className="text-sm font-mono text-[#007A87] tracking-widest uppercase">05.</span>
+          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">05.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Achievements</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
         </motion.div>
@@ -59,8 +59,8 @@ export default function Achievements() {
           {achievements.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className={`relative rounded-2xl border border-border bg-gradient-to-br ${item.gradient} bg-card overflow-hidden card-hover p-6`}
             >
@@ -84,13 +84,13 @@ export default function Achievements() {
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
                     <h3 className="font-bold text-foreground text-lg leading-tight">{item.title}</h3>
                     <span
-                      className="text-xs font-medium px-2.5 py-1 rounded-full flex-shrink-0"
-                      style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                      className="text-xs font-medium px-2.5 py-1 rounded-full flex-shrink-0 accent-ink"
+                      style={{ "--accent": item.color, backgroundColor: `${item.color}15` } as React.CSSProperties}
                     >
                       {item.date}
                     </span>
                   </div>
-                  <p className="text-sm font-semibold mb-2" style={{ color: item.color }}>
+                  <p className="text-sm font-semibold mb-2 accent-ink" style={{ "--accent": item.color } as React.CSSProperties}>
                     {item.subtitle}
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>

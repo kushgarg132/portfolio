@@ -73,7 +73,7 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-3 mb-12"
         >
-          <span className="text-sm font-mono text-[#007A87] tracking-widest uppercase">04.</span>
+          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">04.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Projects</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
         </motion.div>
@@ -99,12 +99,12 @@ export default function Projects() {
                   {project.badges.map((badge) => (
                     <span
                       key={badge}
-                      className="px-2 py-0.5 rounded-full text-xs font-medium"
+                      className="px-2 py-0.5 rounded-full text-xs font-medium accent-ink"
                       style={{
+                        "--accent": project.accentColor,
                         backgroundColor: `${project.accentColor}15`,
-                        color: project.accentColor,
                         border: `1px solid ${project.accentColor}25`,
-                      }}
+                      } as React.CSSProperties}
                     >
                       {badge}
                     </span>
@@ -112,10 +112,10 @@ export default function Projects() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-[#007A87] transition-colors duration-200">
+                <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-teal-ink transition-colors duration-200">
                   {project.title}
                 </h3>
-                <p className="text-sm font-medium mb-3" style={{ color: project.accentColor }}>
+                <p className="text-sm font-medium mb-3 accent-ink" style={{ "--accent": project.accentColor } as React.CSSProperties}>
                   {project.subtitle}
                 </p>
 
@@ -137,13 +137,13 @@ export default function Projects() {
                 </div>
 
                 {/* Links */}
-                <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <div className="flex items-center gap-3 pt-2 border-t border-border">
                   {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#007A87] transition-colors duration-200 cursor-pointer"
+                    className="flex items-center gap-1.5 min-h-11 px-1 text-sm text-muted-foreground hover:text-teal-ink transition-colors duration-200 cursor-pointer"
                     aria-label={`${project.title} on GitHub`}
                   >
                     <Github size={15} />
@@ -154,7 +154,7 @@ export default function Projects() {
                     href={project.live ?? project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#007A87] transition-colors duration-200 cursor-pointer ml-auto"
+                    className="flex items-center gap-1.5 min-h-11 px-1 text-sm text-muted-foreground hover:text-teal-ink transition-colors duration-200 cursor-pointer ml-auto"
                     aria-label={`View ${project.title}`}
                   >
                     <ExternalLink size={15} />
@@ -177,7 +177,7 @@ export default function Projects() {
             href="https://github.com/kushgarg132"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-muted-foreground hover:border-[#007A87] hover:text-[#007A87] transition-all duration-200 text-sm font-medium"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-muted-foreground hover:border-teal hover:text-teal-ink transition-all duration-200 text-sm font-medium"
           >
             <Github size={16} />
             View all projects on GitHub
