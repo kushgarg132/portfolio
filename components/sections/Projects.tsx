@@ -10,28 +10,38 @@ const projects: Array<{
   description: string;
   stack: string[];
   badges: string[];
-  github: string;
+  github?: string;
   live?: string;
   accentColor: string;
   featured?: boolean;
 }> = [
   {
-    title: "NeoTrade AI",
-    subtitle: "Multi-Agent Stock Analysis Platform",
+    title: "NeoTrade",
+    subtitle: "Rules-First Trading Cockpit for Indian Markets",
     description:
-      "5-agent LangGraph system (Master, Analyst, Quant, Risk, Chat) with async FastAPI backend, Redis caching, TA-Lib indicators, and Google Gemini LLM for intelligent market analysis.",
-    stack: ["Python", "FastAPI", "LangGraph", "Redis", "MongoDB", "Gemini Pro"],
-    badges: ["AI", "Multi-Agent", "LLM"],
-    github: "https://github.com/kushgarg132/AI_Stock_Investor",
-    live: "https://ai-stock-investor.vercel.app",
+      "Strategy engine for Indian equities and F&O that emits fully-sized trades with stops, targets, and composite scores. AI conviction is capped at 30% in the type system; includes risk-aware sizing, an approval inbox, backtesting with Indian transaction costs, and Zerodha Kite broker integration.",
+    stack: ["Python", "FastAPI", "LangGraph", "MongoDB", "Redis", "React 19"],
+    badges: ["Live", "Fintech", "AI"],
+    github: "https://github.com/kushgarg132/NeoTrade",
+    live: "https://neotrade-trading.vercel.app",
     accentColor: "#7c3aed",
+  },
+  {
+    title: "RoutineOS",
+    subtitle: "Personal Discipline & Routine Tracker",
+    description:
+      "Daily timetable tracker with deterministic discipline scores, streaks, heatmaps, achievements, and reports, plus meal and workout tracking. Timezone-aware scheduled sweeps, precomputed rollups, FCM push notifications, and push-to-deploy CI/CD to a self-hosted VM.",
+    stack: ["Java 21", "Spring Boot 3", "PostgreSQL", "Flyway", "React", "TypeScript"],
+    badges: ["Live", "Full-Stack", "Java"],
+    live: "https://frontend-seven-pied-17.vercel.app",
+    accentColor: "#16a34a",
   },
   {
     title: "Betrix",
     subtitle: "AI-Powered Multiplayer Poker Platform",
     description:
-      "Full-stack Texas Hold'em platform with Gemini AI bot opponents, GraphQL subscriptions + WebSocket for real-time game state sync, hand evaluation engine, atomic wallet transactions, game replay analysis, and Swagger/OpenAPI docs.",
-    stack: ["Java 21", "Spring Boot 3.4", "GraphQL", "Gemini AI", "React", "Apollo Client"],
+      "Full-stack Texas Hold'em platform with Gemini AI bot opponents, GraphQL subscriptions + WebSocket for real-time game state sync, hand evaluation engine with side-pot handling, JWT + guest auth, and game event replay.",
+    stack: ["Java 21", "Spring Boot 3.5", "GraphQL", "Gemini AI", "React", "Apollo Client"],
     badges: ["Live", "AI", "Real-time", "Java"],
     github: "https://github.com/kushgarg132/Betrix",
     live: "https://betrix-b3c24.web.app",
@@ -128,6 +138,7 @@ export default function Projects() {
 
                 {/* Links */}
                 <div className="flex items-center gap-3 pt-4 border-t border-border">
+                  {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
@@ -138,6 +149,7 @@ export default function Projects() {
                     <Github size={15} />
                     <span>Source</span>
                   </a>
+                  )}
                   <a
                     href={project.live ?? project.github}
                     target="_blank"
