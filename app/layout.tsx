@@ -14,6 +14,8 @@ const mono = JetBrains_Mono({
   weight: ["400", "500"],
   variable: "--font-mono",
   display: "swap",
+  // only used for small labels/tags below the fold; don't compete with the hero for bandwidth
+  preload: false,
 });
 
 // Runs before paint so visitors who chose light mode never see a dark flash.

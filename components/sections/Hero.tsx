@@ -22,8 +22,13 @@ function GridBackground() {
           backgroundSize: "50px 50px",
         }}
       />
-      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-teal opacity-[0.06] blur-3xl" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-teal opacity-[0.04] blur-3xl" />
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 0% 0%, rgba(0,122,135,0.07), transparent 30rem), radial-gradient(circle at 100% 100%, rgba(0,122,135,0.05), transparent 30rem)",
+        }}
+      />
     </div>
   );
 }
@@ -84,7 +89,7 @@ function ProfilePhoto() {
   return (
     <div className="relative flex-shrink-0 flex items-center justify-center animate-fade-in">
       {/* Outer glow ring */}
-      <div className="absolute inset-0 rounded-full bg-teal opacity-20 blur-2xl scale-110" />
+      <div className="absolute -inset-8 rounded-full" style={{ backgroundImage: "radial-gradient(closest-side, rgba(0,122,135,0.25), transparent)" }} />
 
       {/* Rotating dashed ring */}
       <div
@@ -101,6 +106,7 @@ function ProfilePhoto() {
           src="/kush.jpg"
           alt="Kush Garg"
           fill
+          sizes="(min-width: 1024px) 288px, (min-width: 640px) 240px, 208px"
           className="object-cover object-top"
           priority
         />
@@ -218,7 +224,7 @@ export default function Hero() {
       {/* Scroll indicator */}
       <button
         onClick={scrollToAbout}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 p-3 rounded-full text-muted-foreground hover:text-teal-ink transition-colors cursor-pointer"
+        className="hidden sm:block absolute bottom-6 left-1/2 -translate-x-1/2 p-3 rounded-full text-muted-foreground hover:text-teal-ink transition-colors cursor-pointer"
         aria-label="Scroll down"
       >
         <ArrowDown size={20} />
