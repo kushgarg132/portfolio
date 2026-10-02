@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "@/hooks/useInView";
 import { Trophy, Globe, Code } from "lucide-react";
 
 const achievements = [
@@ -38,30 +34,21 @@ const achievements = [
 ];
 
 export default function Achievements() {
-  const { ref, inView } = useInView(0.1);
-
   return (
     <section id="achievements" className="py-24 px-4 sm:px-6 lg:px-8">
-      <div ref={ref} className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 mb-12"
+        <div data-reveal className="flex items-center gap-3 mb-12"
         >
           <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">05.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Achievements</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </motion.div>
+        </div>
 
         <div className="space-y-5">
-          {achievements.map((item, i) => (
-            <motion.div
+          {achievements.map((item) => (
+            <div data-reveal
               key={item.title}
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
               className={`relative rounded-2xl border border-border bg-gradient-to-br ${item.gradient} bg-card overflow-hidden card-hover p-6`}
             >
               {/* Left accent */}
@@ -96,7 +83,7 @@ export default function Achievements() {
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

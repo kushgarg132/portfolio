@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "@/hooks/useInView";
 import { MapPin, Calendar } from "lucide-react";
 
 const experiences = [
@@ -36,22 +32,16 @@ const experiences = [
 ];
 
 export default function Experience() {
-  const { ref, inView } = useInView(0.1);
-
   return (
     <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8">
-      <div ref={ref} className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 mb-12"
+        <div data-reveal className="flex items-center gap-3 mb-12"
         >
           <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">03.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Experience</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </motion.div>
+        </div>
 
         {/* Timeline */}
         <div className="relative">
@@ -59,12 +49,9 @@ export default function Experience() {
           <div className="absolute left-0 top-0 bottom-0 w-px bg-border hidden sm:block" style={{ left: "7px" }} />
 
           <div className="space-y-10">
-            {experiences.map((exp, i) => (
-              <motion.div
+            {experiences.map((exp) => (
+              <div data-reveal
                 key={`${exp.role}-${exp.period}`}
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
                 className="sm:pl-10 relative"
               >
                 {/* Timeline dot */}
@@ -129,7 +116,7 @@ export default function Experience() {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

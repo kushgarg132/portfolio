@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
 
@@ -29,8 +28,20 @@ function GridBackground() {
   );
 }
 
+function usePrefersReducedMotion() {
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduce(mq.matches);
+    const onChange = () => setReduce(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return reduce;
+}
+
 function Typewriter() {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [index, setIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [deleting, setDeleting] = useState(false);
@@ -71,12 +82,7 @@ function Typewriter() {
 
 function ProfilePhoto() {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.85 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.7, delay: 0.2 }}
-      className="relative flex-shrink-0 flex items-center justify-center"
-    >
+    <div className="relative flex-shrink-0 flex items-center justify-center animate-fade-in">
       {/* Outer glow ring */}
       <div className="absolute inset-0 rounded-full bg-teal opacity-20 blur-2xl scale-110" />
 
@@ -99,7 +105,7 @@ function ProfilePhoto() {
           priority
         />
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -119,57 +125,36 @@ export default function Hero() {
           {/* Left: Text content */}
           <div className="flex-1 text-center lg:text-left max-w-xl">
             {/* Badge */}
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal/30 bg-teal/8 text-teal-ink text-sm font-medium mb-6 lg:hidden"
-            >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal/30 bg-teal/8 text-teal-ink text-sm font-medium mb-6 lg:hidden">
               <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
               Open to remote &amp; relocation
-            </motion.div>
+            </div>
 
             {/* Name */}
-            <motion.h1
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+            <h1
               className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-4"
             >
               Kush{" "}
 <span className="text-teal-ink">Garg</span>
-            </motion.h1>
+            </h1>
 
             {/* Typewriter */}
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="text-xl sm:text-2xl font-medium h-9 mb-5"
-            >
+            <div className="text-xl sm:text-2xl font-medium h-9 mb-5">
               <Typewriter />
-            </motion.div>
+            </div>
 
             {/* Bio */}
-            <motion.p
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
+            <p
               className="text-muted-foreground text-base sm:text-lg max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
             >
               Building payment infrastructure at StoneX.{" "}
               <span className="text-teal-ink">SWIFT</span> ·{" "}
               <span className="text-teal-ink">Microservices</span> ·{" "}
               <span className="text-teal-ink">Multi-agent AI</span>.
-            </motion.p>
+            </p>
 
             {/* CTA Buttons */}
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8"
-            >
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8">
               <button
                 onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
                 className="px-6 py-3 rounded-xl bg-teal text-white font-medium hover:bg-teal-dark transition-all duration-200 hover:shadow-lg hover:shadow-teal/30 cursor-pointer"
@@ -190,15 +175,10 @@ export default function Hero() {
               >
                 Contact Me
               </button>
-            </motion.div>
+            </div>
 
             {/* Social links */}
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex items-center justify-center lg:justify-start gap-4"
-            >
+            <div className="flex items-center justify-center lg:justify-start gap-4">
               {[
                 { icon: <Github size={20} />, href: "https://github.com/kushgarg132", label: "GitHub" },
                 { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/kush-garg-809617208/", label: "LinkedIn" },
@@ -219,21 +199,16 @@ export default function Hero() {
                 <MapPin size={14} aria-hidden="true" />
                 Pune, IN
               </span>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right: Photo */}
           <div className="flex flex-col items-center gap-6">
             {/* Desktop badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="hidden lg:inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal/30 bg-teal/8 text-teal-ink text-sm font-medium"
-            >
+            <div className="hidden lg:inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal/30 bg-teal/8 text-teal-ink text-sm font-medium">
               <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
               Open to remote &amp; relocation
-            </motion.div>
+            </div>
 
             <ProfilePhoto />
           </div>
@@ -241,16 +216,13 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+      <button
         onClick={scrollToAbout}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 p-3 rounded-full text-muted-foreground hover:text-teal-ink transition-colors cursor-pointer"
         aria-label="Scroll down"
       >
         <ArrowDown size={20} />
-      </motion.button>
+      </button>
 
       <style jsx>{`
         @keyframes spin {

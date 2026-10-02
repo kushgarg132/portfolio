@@ -12,7 +12,7 @@ export default function Footer() {
             <span className="text-foreground">.</span>
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            Built with Next.js 14 · Tailwind CSS · Framer Motion
+            Built with Next.js · Tailwind CSS
           </p>
         </div>
 

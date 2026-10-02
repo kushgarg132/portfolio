@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "@/hooks/useInView";
 import { Code2, Database, Brain, Server, Globe, Layers } from "lucide-react";
 
 const skillGroups = [
@@ -44,30 +40,21 @@ const skillGroups = [
 ];
 
 export default function Skills() {
-  const { ref, inView } = useInView(0.1);
-
   return (
     <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-card/30">
-      <div ref={ref} className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 mb-12"
+        <div data-reveal className="flex items-center gap-3 mb-12"
         >
           <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">02.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Skills</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </motion.div>
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skillGroups.map((group, i) => (
-            <motion.div
+          {skillGroups.map((group) => (
+            <div data-reveal
               key={group.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
               className="rounded-2xl border border-border bg-card p-6 card-hover group"
             >
               {/* Header */}
@@ -92,7 +79,7 @@ export default function Skills() {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useInView } from "@/hooks/useInView";
 import { Github, ExternalLink } from "lucide-react";
 
 const projects: Array<{
@@ -61,30 +57,21 @@ const projects: Array<{
 ];
 
 export default function Projects() {
-  const { ref, inView } = useInView(0.08);
-
   return (
     <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 bg-card/30">
-      <div ref={ref} className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 mb-12"
+        <div data-reveal className="flex items-center gap-3 mb-12"
         >
           <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">04.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Projects</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((project, i) => (
-            <motion.div
+          {projects.map((project) => (
+            <div data-reveal
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group relative rounded-2xl border border-border bg-card overflow-hidden card-hover flex flex-col"
             >
               {/* Top accent bar */}
@@ -162,16 +149,12 @@ export default function Projects() {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* GitHub CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center mt-12"
+        <div data-reveal className="text-center mt-12"
         >
           <a
             href="https://github.com/kushgarg132"
@@ -182,7 +165,7 @@ export default function Projects() {
             <Github size={16} />
             View all projects on GitHub
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

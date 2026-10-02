@@ -1,14 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "@/hooks/useInView";
 import { Send, Github, Linkedin, Mail, MapPin } from "lucide-react";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
 export default function Contact() {
-  const { ref, inView } = useInView(0.1);
   const [formState, setFormState] = useState<FormState>("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
@@ -38,26 +35,18 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-card/30">
-      <div ref={ref} className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 mb-12"
+        <div data-reveal className="flex items-center gap-3 mb-12"
         >
           <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">06.</span>
           <h2 className="text-3xl sm:text-4xl font-bold">Get In Touch</h2>
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left: Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="space-y-6"
+          <div data-reveal className="space-y-6"
           >
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-3">Let&apos;s work together</h3>
@@ -109,13 +98,10 @@ export default function Contact() {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.25 }}
+          <div data-reveal
           >
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -195,7 +181,7 @@ export default function Contact() {
                 </p>
               )}
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

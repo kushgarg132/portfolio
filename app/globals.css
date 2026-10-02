@@ -15,8 +15,8 @@
     --radius: 0.625rem;
     --teal: #007A87;
     --teal-light: #00A3B4;
-    /* teal for text: 5.1:1 on white */
-    --teal-ink: 0 122 135;
+    /* teal for text: #006B77, 6.2:1 on white, >5:1 on teal/10 tints */
+    --teal-ink: 0 107 119;
   }
 
   .dark {
@@ -70,6 +70,20 @@
   animation: blink 1s step-end infinite;
 }
 
+/* Scroll reveal: native scroll-driven animation, zero JS. Browsers without
+   animation-timeline support just show the content. */
+@supports (animation-timeline: view()) {
+  [data-reveal] {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(16px); }
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -86,8 +100,9 @@
 /* Keyboard focus */
 :focus-visible { outline: 2px solid rgb(var(--teal-ink)); outline-offset: 2px; border-radius: 6px; }
 
-/* Accent-colored text (project/achievement accents): lift toward white in dark mode for contrast */
-.accent-ink { color: var(--accent); }
+/* Accent-colored text (project/achievement accents): pushed toward black in light mode and
+   toward white in dark mode so every accent (green, amber, ...) clears 4.5:1 */
+.accent-ink { color: color-mix(in oklab, var(--accent) 65%, black); }
 .dark .accent-ink { color: color-mix(in oklab, var(--accent) 55%, white); }
 
 @media (prefers-reduced-motion: reduce) {
