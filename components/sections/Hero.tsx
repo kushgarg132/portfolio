@@ -99,7 +99,7 @@ function ProfilePhoto() {
         className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card border border-[#007A87]/30 text-xs font-medium text-[#007A87] shadow-lg"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-[#007A87] animate-pulse" />
-        Open to Remote
+        Open to Remote &amp; Relocation
       </motion.div>
     </motion.div>
   );
@@ -128,7 +128,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#007A87]/30 bg-[#007A87]/8 text-[#007A87] text-sm font-medium mb-6 lg:hidden"
             >
               <span className="w-2 h-2 rounded-full bg-[#007A87] animate-pulse" />
-              Available for remote opportunities
+              Open to remote &amp; relocation
             </motion.div>
 
             {/* Name */}
@@ -238,7 +238,7 @@ export default function Hero() {
               className="hidden lg:inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#007A87]/30 bg-[#007A87]/8 text-[#007A87] text-sm font-medium"
             >
               <span className="w-2 h-2 rounded-full bg-[#007A87] animate-pulse" />
-              Available for remote opportunities
+              Open to remote &amp; relocation
             </motion.div>
 
             <ProfilePhoto />

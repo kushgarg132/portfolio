@@ -52,8 +52,8 @@ const projects: Array<{
     title: "Chess Platform",
     subtitle: "Distributed Microservices Platform",
     description:
-      "7 Spring Boot microservices with Spring Cloud Gateway, Stockfish AI integration for game analysis, ELO rating system backed by Redis leaderboard, and Next.js 14 frontend.",
-    stack: ["Spring Cloud Gateway", "PostgreSQL", "Redis", "Next.js 14"],
+      "7 Spring Boot microservices behind Spring Cloud Gateway with JWT auth: WebSocket game service, ELO-bracketed matchmaking on a Redis queue, rating service, and a pooled Stockfish engine service for AI play and analysis. Next.js frontend.",
+    stack: ["Java 21", "Spring Cloud Gateway", "PostgreSQL", "Redis", "WebSocket", "Next.js"],
     badges: ["Microservices", "Distributed"],
     github: "https://github.com/kushgarg132/Chess",
     accentColor: "#0e7490",
@@ -78,7 +78,7 @@ export default function Projects() {
           <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}

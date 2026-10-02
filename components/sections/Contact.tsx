@@ -62,7 +62,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-3">Let&apos;s work together</h3>
               <p className="text-muted-foreground leading-relaxed">
-                I&apos;m currently open to remote opportunities in backend engineering, distributed systems,
+                I&apos;m currently open to remote roles and relocation for opportunities in backend engineering, distributed systems,
                 and fintech infrastructure. Whether you have a role, a project, or just want to connect
                 — my inbox is open.
               </p>
@@ -71,7 +71,7 @@ export default function Contact() {
             <div className="space-y-4">
               {[
                 { icon: <Mail size={18} />, label: "Email", value: "gargkush2003@gmail.com", href: "mailto:gargkush2003@gmail.com" },
-                { icon: <MapPin size={18} />, label: "Location", value: "Pune, IN · Remote" },
+                { icon: <MapPin size={18} />, label: "Location", value: "Pune, IN · Remote / Relocate" },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-3">
                   <div className="p-2 rounded-lg bg-[#007A87]/10 text-[#007A87]">{item.icon}</div>

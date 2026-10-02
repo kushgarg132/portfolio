@@ -15,7 +15,7 @@ const skillGroups = [
     icon: <Layers size={20} />,
     title: "Frameworks",
     color: "#0891b2",
-    skills: ["Spring Boot", "Spring Security", "Spring WebSocket", "Spring Cloud Gateway", "FastAPI", "Node.js", "React", "Next.js 14"],
+    skills: ["Spring Boot", "Spring Security", "Spring WebSocket", "Spring Cloud Gateway", "FastAPI", "Node.js", "React", "Next.js"],
   },
   {
     icon: <Database size={20} />,

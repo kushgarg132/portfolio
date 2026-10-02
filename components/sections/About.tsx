@@ -53,7 +53,7 @@ export default function About() {
             <p className="text-muted-foreground text-lg leading-relaxed">
               Outside of fintech infrastructure, I build{" "}
               <span className="text-[#007A87] font-medium">multi-agent AI systems</span> — LangGraph
-              pipelines with Gemini LLMs, real-time distributed platforms, and microservices
+              agent pipelines, real-time distributed platforms, and microservices
               architectures. I believe elegant engineering lives at the intersection of correctness,
               performance, and craft.
             </p>
@@ -103,7 +103,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-[#007A87]" />
-                  Pune, India · Open to Relocate
+                  Pune, India · Open to Remote &amp; Relocation
                 </div>
               </div>
             </div>
