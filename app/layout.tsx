@@ -1,30 +1,36 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Archivo, Bodoni_Moda, Martian_Mono } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 
-const inter = Inter({
+// Didone engraving face for legends and figures, as on security-printed notes
+const display = Bodoni_Moda({
   subsets: ["latin"],
+  axes: ["opsz"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+// workhorse grotesque; the width axis gives the extended caps of note legends
+const sans = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
+// serial numbers and microprint
+const mono = Martian_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-mono",
   display: "swap",
-  // only used for small labels/tags below the fold; don't compete with the hero for bandwidth
   preload: false,
 });
 
-// Runs before paint so visitors who chose light mode never see a dark flash.
-const themeScript = `try{if(localStorage.getItem("theme")==="light")document.documentElement.classList.remove("dark")}catch(e){}`;
-
 export const metadata: Metadata = {
-  title: "Kush Garg · Backend Engineer",
+  title: "Kush Garg · Backend + AI Systems Engineer",
   description:
-    "Backend Engineer specializing in SWIFT ISO 20022, Distributed Systems, and AI/LLM Systems. Building payment infrastructure at StoneX Group.",
+    "Backend + AI systems engineer. Building SWIFT ISO 20022 payment infrastructure at StoneX Group, and shipping multi-agent AI and distributed systems.",
   keywords: [
     "Kush Garg",
     "Backend Engineer",
@@ -38,25 +44,16 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kush Garg", url: "https://github.com/kushgarg132" }],
   openGraph: {
-    title: "Kush Garg · Backend Engineer",
-    description: "Building payment infrastructure at StoneX. SWIFT · Microservices · Multi-agent AI.",
+    title: "Kush Garg · Backend + AI Systems Engineer",
+    description: "Payment infrastructure at StoneX. SWIFT · Microservices · Multi-agent AI.",
     type: "website",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn("dark", inter.variable, mono.variable)} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
-      <body className="antialiased font-sans bg-background text-foreground">
-        {children}
-      </body>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+      <body className="antialiased font-sans bg-paper text-ink">{children}</body>
     </html>
   );
 }

@@ -1,9 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { Band } from "@/components/Print";
+import { EMAIL, dest, socials } from "@/lib/site";
 
 type FormState = "idle" | "loading" | "success" | "error";
+
+const icons: Record<string, React.ReactNode> = {
+  GitHub: <Github size={16} aria-hidden="true" />,
+  LinkedIn: <Linkedin size={16} aria-hidden="true" />,
+  Email: <Mail size={16} aria-hidden="true" />,
+};
+
+const field =
+  "w-full bg-transparent border-0 border-b border-ink/50 px-0 py-2.5 text-ink text-base placeholder:text-ink-faint focus:outline-none focus:border-serial focus:ring-0 transition-colors";
 
 export default function Contact() {
   const [formState, setFormState] = useState<FormState>("idle");
@@ -12,14 +23,12 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("loading");
-
     try {
       const res = await fetch("https://formspree.io/f/xnjwqdyn", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(form),
       });
-
       if (res.ok) {
         setFormState("success");
         setForm({ name: "", email: "", message: "" });
@@ -29,159 +38,119 @@ export default function Contact() {
     } catch {
       setFormState("error");
     }
-
-    setTimeout(() => setFormState("idle"), 4000);
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-card/30">
-      <div className="max-w-5xl mx-auto">
-        {/* Section header */}
-        <div data-reveal className="flex items-center gap-3 mb-12"
-        >
-          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">06.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold">Get In Touch</h2>
-          <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
+    <section id="contact" aria-labelledby="contact-title" className="px-3 sm:px-10 lg:px-16 py-24 sm:py-32 bg-paper-deep/60">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-14 lg:gap-20 items-start">
+        <div data-print className="px-2 sm:px-0">
+          <h2 id="contact-title" className="font-display text-5xl sm:text-6xl leading-[0.95] tracking-tight">
+            Let&apos;s work together
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-ink-soft max-w-[48ch]">
+            Open to remote roles and relocation in backend engineering, distributed systems, and fintech
+            infrastructure. A role, a project, or just a hello: my inbox is open.
+          </p>
+          <a href={`mailto:${EMAIL}`} className="mt-8 inline-block font-display text-2xl sm:text-3xl ink-link break-all">
+            {EMAIL}
+          </a>
+          <ul className="mt-8 space-y-1">
+            {socials.slice(0, 2).map((s) => (
+              <li key={s.label}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 py-2">
+                  {icons[s.label]}
+                  <span className="ink-link font-medium">{s.label}</span>
+                  <span className="font-mono text-[0.62rem] text-ink-faint">{dest(s.href)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left: Info */}
-          <div data-reveal className="space-y-6"
-          >
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">Let&apos;s work together</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                I&apos;m currently open to remote roles and relocation for opportunities in backend engineering, distributed systems,
-                and fintech infrastructure. Whether you have a role, a project, or just want to connect
-                — my inbox is open.
+        {/* the slip */}
+        <div data-print className="relative bg-paper border border-ink/70 rounded-[3px] shadow-[0_18px_40px_-24px_rgb(20_38_64/0.45)]">
+          <div className="perforated h-2 -mt-1" aria-hidden="true" />
+          <Band />
+          <form onSubmit={handleSubmit} className="p-6 sm:p-10 space-y-7" aria-describedby="slip-note">
+            <div className="flex items-baseline justify-between gap-4">
+              <p className="legend text-[0.7rem]">Message to Kush Garg</p>
+              <p className="font-mono text-serial text-xs tabular" aria-hidden="true">
+                Nº 0001
               </p>
             </div>
 
-            <div className="space-y-4">
-              {[
-                { icon: <Mail size={18} />, label: "Email", value: "gargkush2003@gmail.com", href: "mailto:gargkush2003@gmail.com" },
-                { icon: <MapPin size={18} />, label: "Location", value: "Pune, IN · Remote / Relocate" },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-teal/10 text-teal-ink">{item.icon}</div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">{item.label}</p>
-                    {item.href ? (
-                      <a href={item.href} className="text-sm font-medium text-foreground hover:text-teal-ink transition-colors">
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className="text-sm font-medium text-foreground">{item.value}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Social links */}
-            <div className="flex gap-3 pt-2">
-              {[
-                { icon: <Github size={20} />, href: "https://github.com/kushgarg132", label: "GitHub" },
-                { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/kush-garg-809617208/", label: "LinkedIn" },
-                { icon: <Mail size={20} />, href: "mailto:gargkush2003@gmail.com", label: "Email" },
-              ].map(({ icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex items-center gap-2 px-4 py-3 rounded-xl border border-border text-muted-foreground hover:text-teal-ink hover:border-teal transition-all duration-200 text-sm font-medium cursor-pointer"
-                >
-                  {icon}
-                  {label}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: Form */}
-          <div data-reveal
-          >
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid sm:grid-cols-2 gap-7">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
-                  Name <span className="text-teal-ink">*</span>
+                <label htmlFor="name" className="legend text-[0.66rem] text-ink-soft">
+                  Your name
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   required
+                  autoComplete="name"
                   value={form.name}
                   onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                  placeholder="Kush Garg"
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-teal/40 focus:border-teal transition-all duration-200 text-sm"
+                  className={field}
                 />
               </div>
-
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
-                  Email <span className="text-teal-ink">*</span>
+                <label htmlFor="email" className="legend text-[0.66rem] text-ink-soft">
+                  Your email
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
+                  autoComplete="email"
                   value={form.email}
                   onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                  placeholder="you@example.com"
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-teal/40 focus:border-teal transition-all duration-200 text-sm"
+                  placeholder="you@company.com"
+                  className={field}
                 />
               </div>
+            </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
-                  Message <span className="text-teal-ink">*</span>
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={5}
-                  value={form.message}
-                  onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                  placeholder="Hi Kush, I'd love to connect about..."
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-teal/40 focus:border-teal transition-all duration-200 text-sm resize-none"
-                />
-              </div>
+            <div>
+              <label htmlFor="message" className="legend text-[0.66rem] text-ink-soft">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                value={form.message}
+                onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                placeholder="Hi Kush, I'd like to talk about…"
+                className={`${field} resize-none leading-[2.6rem] bg-[linear-gradient(transparent_calc(2.6rem-1px),rgb(20_38_64/0.18)_calc(2.6rem-1px))] bg-[length:100%_2.6rem] border-b-0 py-0`}
+              />
+            </div>
 
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-1">
               <button
                 type="submit"
                 disabled={formState === "loading"}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal text-white font-medium hover:bg-teal-dark transition-all duration-200 hover:shadow-lg hover:shadow-teal/30 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-ink text-paper rounded-[2px] font-medium hover:bg-serial transition-colors disabled:opacity-60 disabled:cursor-wait"
               >
-                {formState === "loading" ? (
-                  <>
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                    Sending…
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    Send Message
-                  </>
-                )}
+                {formState === "loading" ? "Sending…" : "Send message"}
+                <ArrowRight size={16} aria-hidden="true" />
               </button>
-
-              {formState === "success" && (
-                <p className="text-center text-sm text-green-500 font-medium">
-                  Message sent! I&apos;ll get back to you soon.
-                </p>
-              )}
-              {formState === "error" && (
-                <p className="text-center text-sm text-red-500 font-medium">
-                  Something went wrong. Please email me directly.
-                </p>
-              )}
-            </form>
-          </div>
+              <p id="slip-note" role="status" aria-live="polite" className="text-sm">
+                {formState === "success" && <span className="text-[#2f6b45] font-medium">Sent. I&apos;ll get back to you soon.</span>}
+                {formState === "error" && (
+                  <span className="text-serial font-medium">
+                    That didn&apos;t go through. Email me at {EMAIL} instead.
+                  </span>
+                )}
+                {(formState === "idle" || formState === "loading") && (
+                  <span className="text-ink-faint">Goes straight to my inbox.</span>
+                )}
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </section>

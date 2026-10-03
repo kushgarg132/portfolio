@@ -1,92 +1,49 @@
-const stats = [
-  { value: "2+", label: "Years Experience" },
-  { value: "$600M", label: "Impact (XPAY)" },
-  { value: "7+", label: "SWIFT Message Types" },
-  { value: "3", label: "Live Projects" },
+import { SectionHead } from "@/components/Print";
+
+const particulars = [
+  ["Role", "Software Engineer II, StoneX Group"],
+  ["Since", "Jan 2024 (intern), Aug 2024 (full time)"],
+  ["Education", "B.Tech CS (AI & ML), Symbiosis Institute of Technology, Pune"],
+  ["Based in", "Pune, India · open to remote & relocation"],
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8">
+    <section id="about" aria-labelledby="about-title" className="px-5 sm:px-10 lg:px-16 py-24 sm:py-32">
       <div className="max-w-6xl mx-auto">
-        {/* Section label */}
-        <div data-reveal className="flex items-center gap-3 mb-12"
-        >
-          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">01.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold">About Me</h2>
-          <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </div>
+        <SectionHead id="about" title="About" />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Text */}
-          <div data-reveal className="space-y-5"
-          >
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              I&apos;m a Software Engineer at{" "}
-              <span className="text-teal-ink font-medium">StoneX Group</span>, where I build
-              mission-critical payment infrastructure connecting global financial systems. My work
-              spans the full lifecycle of SWIFT messaging — from transforming Treasury Management
-              System payloads into ISO 20022 standards to processing real-time acknowledgements.
+        <div className="grid lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-12 lg:gap-20">
+          <div data-print className="space-y-6 text-lg leading-relaxed max-w-[65ch]">
+            <p className="font-display text-2xl sm:text-3xl leading-snug">
+              I write the software that moves money between banks, and build AI systems on my own
+              time.
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              I co-drove{" "}
-              <span className="text-teal-ink font-medium">XPAY</span> to production in February
-              2025 — an internal payment platform that now enables{" "}
-              <span className="text-foreground font-semibold">$600M in savings</span>, processing
-              requests from client-facing apps and direct broker initiations across the globe.
+            <p className="text-ink-soft">
+              At StoneX I build mission-critical payment infrastructure: transforming Treasury Management
+              System payloads into ISO 20022 messages, delivering them to the SWIFT network, and processing
+              the acknowledgements that come back.
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Outside of fintech infrastructure, I build{" "}
-              <span className="text-teal-ink font-medium">multi-agent AI systems</span> — LangGraph
-              agent pipelines, real-time distributed platforms, and microservices
-              architectures. I believe elegant engineering lives at the intersection of correctness,
-              performance, and craft.
+            <p className="text-ink-soft">
+              I co-drove <strong className="text-ink font-semibold">XPAY</strong> to production in February
+              2025, an internal payment platform that now enables{" "}
+              <strong className="text-serial font-semibold">$600M in savings</strong>, handling requests from
+              client-facing apps and direct broker initiations across the globe.
             </p>
-
-            <div className="flex flex-wrap gap-3 pt-2">
-              {["Java", "Spring Boot", "SWIFT ISO 20022", "LangGraph", "Python", "Microservices"].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full text-sm font-medium bg-teal/10 text-teal-ink border border-teal/20"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <p className="text-ink-soft">
+              Outside of payments I build multi-agent AI systems with LangGraph, real-time distributed
+              platforms, and microservices. Correctness first, then performance, then craft.
+            </p>
           </div>
 
-          {/* Stats card */}
-          <div data-reveal
-          >
-            <div className="rounded-2xl border border-border bg-card p-8 card-hover">
-              <div className="grid grid-cols-2 gap-6">
-                {stats.map(({ value, label }) => (
-                  <div data-reveal
-                    key={label}
-                    className="text-center p-4 rounded-xl bg-background border border-border/60"
-                  >
-                    <div className="text-3xl font-bold text-teal-ink mb-1">{value}</div>
-                    <div className="text-sm text-muted-foreground font-medium">{label}</div>
-                  </div>
-                ))}
+          <dl data-print className="self-start border-t-2 border-ink">
+            {particulars.map(([k, v]) => (
+              <div key={k} className="grid grid-cols-[7.5rem_1fr] gap-4 py-4 border-b border-ink/20">
+                <dt className="legend text-[0.68rem] text-ink-faint pt-0.5">{k}</dt>
+                <dd className="text-[0.95rem] leading-snug">{v}</dd>
               </div>
-
-              <div className="mt-6 pt-6 border-t border-border space-y-3">
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-teal" />
-                  Software Engineer II · StoneX Group
-                </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-teal" />
-                  B.Tech CS (AI &amp; ML) · Symbiosis Institute of Technology, Pune
-                </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="w-2 h-2 rounded-full bg-teal" />
-                  Pune, India · Open to Remote &amp; Relocation
-                </div>
-              </div>
-            </div>
-          </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

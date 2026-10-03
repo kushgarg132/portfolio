@@ -1,91 +1,55 @@
-import { Trophy, Globe, Code } from "lucide-react";
+import Rosette from "@/components/Rosette";
+import { SectionHead } from "@/components/Print";
 
-const achievements = [
+// Honours set as embossed seals: a small rosette stamped with the year.
+const honours = [
   {
-    icon: <Trophy size={24} />,
-    title: "2nd Place — StoneX India Hackathon",
-    subtitle: "Team Leader",
-    date: "Nov 2025",
+    title: "2nd place, StoneX India Hackathon",
+    role: "Team leader",
+    year: "2025",
     description:
-      "Led a team to 2nd place building an AI ops investigation tool featuring case summarization, multilingual chatbot, and an interactive analytics dashboard.",
-    color: "#f59e0b",
-    gradient: "from-amber-500/10 to-orange-500/5",
+      "Led a team to 2nd place building an AI ops investigation tool with case summarization, a multilingual chatbot, and an interactive analytics dashboard.",
   },
   {
-    icon: <Globe size={24} />,
-    title: "Google Kickstart 2021 — Round B",
-    subtitle: "Global Rank 1596",
-    date: "2021",
-    description:
-      "Achieved Global Rank 1596 in Google Kickstart Round B 2021, competing against thousands of engineers worldwide.",
-    color: "#4285f4",
-    gradient: "from-blue-500/10 to-indigo-500/5",
+    title: "Google Kick Start 2021, Round B",
+    role: "Global rank 1596",
+    year: "2021",
+    description: "Ranked 1596th worldwide in Google Kick Start Round B 2021.",
   },
   {
-    icon: <Code size={24} />,
     title: "ICPC Asia Kanpur Regionals",
-    subtitle: "Team Volatile Voids",
-    date: "2021–2022",
-    description:
-      "Competed in the ICPC Asia Kanpur Regional Contest as part of Team Volatile Voids, one of the most prestigious competitive programming competitions.",
-    color: "#007A87",
-    gradient: "from-teal-500/10 to-cyan-500/5",
+    role: "Team Volatile Voids",
+    year: "2021–22",
+    description: "Competed in the ICPC Asia Kanpur Regional Contest as part of Team Volatile Voids.",
   },
 ];
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Section header */}
-        <div data-reveal className="flex items-center gap-3 mb-12"
-        >
-          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">05.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold">Achievements</h2>
-          <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </div>
+    <section id="achievements" aria-labelledby="achievements-title" className="px-5 sm:px-10 lg:px-16 py-24 sm:py-32">
+      <div className="max-w-6xl mx-auto">
+        <SectionHead id="achievements" title="Achievements" />
 
-        <div className="space-y-5">
-          {achievements.map((item) => (
-            <div data-reveal
-              key={item.title}
-              className={`relative rounded-2xl border border-border bg-gradient-to-br ${item.gradient} bg-card overflow-hidden card-hover p-6`}
-            >
-              {/* Left accent */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl"
-                style={{ backgroundColor: item.color }}
-              />
-
-              <div className="flex gap-5 items-start">
-                {/* Icon */}
-                <div
-                  className="flex-shrink-0 p-3 rounded-xl mt-0.5"
-                  style={{ backgroundColor: `${item.color}15`, color: item.color }}
-                >
-                  {item.icon}
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
-                    <h3 className="font-bold text-foreground text-lg leading-tight">{item.title}</h3>
-                    <span
-                      className="text-xs font-medium px-2.5 py-1 rounded-full flex-shrink-0 accent-ink"
-                      style={{ "--accent": item.color, backgroundColor: `${item.color}15` } as React.CSSProperties}
-                    >
-                      {item.date}
-                    </span>
-                  </div>
-                  <p className="text-sm font-semibold mb-2 accent-ink" style={{ "--accent": item.color } as React.CSSProperties}>
-                    {item.subtitle}
-                  </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-                </div>
+        <ul className="grid md:grid-cols-3 gap-12 md:gap-10">
+          {honours.map((h, i) => (
+            <li data-print key={h.title}>
+              <div className="relative w-32 h-32" aria-hidden="true">
+                <Rosette
+                  id={`seal-${i}`}
+                  className="absolute inset-0 w-full h-full"
+                  layers={[
+                    { R: 120, r: 5, d: 14, color: "var(--tint-rose)", copies: 6, width: 0.6 },
+                    { R: 150, r: 5, d: 6, color: "var(--ink)", copies: 2, width: 0.6 },
+                  ]}
+                />
+                <span className={`absolute inset-0 grid place-items-center font-display tabular ${h.year.length > 4 ? "text-sm" : "text-lg"}`}>{h.year}</span>
               </div>
-            </div>
+              <h3 className="mt-5 font-display text-2xl leading-tight">{h.title}</h3>
+              <p className="mt-1 legend text-[0.68rem] text-ink-soft">{h.role}</p>
+              <p className="mt-3 text-ink-soft leading-relaxed">{h.description}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

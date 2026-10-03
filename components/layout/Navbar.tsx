@@ -1,164 +1,112 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/hooks/useTheme";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { RESUME } from "@/lib/site";
 
 const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
   { label: "Achievements", href: "#achievements" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const { theme, toggle } = useTheme();
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const sectionIds = navLinks.map((l) => l.href.slice(1));
-    // Track which sections are currently visible and pick the topmost one
-    const visibleSections = new Set<string>();
-
-    observerRef.current = new IntersectionObserver(
+    const ids = navLinks.map((l) => l.href.slice(1));
+    const visible = new Set<string>();
+    const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            visibleSections.add(entry.target.id);
-          } else {
-            visibleSections.delete(entry.target.id);
-          }
-        });
-        // Pick the first section in nav order that is visible
-        const active = sectionIds.find((id) => visibleSections.has(id));
-        if (active) setActiveSection(active);
+        entries.forEach((e) => (e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id)));
+        setActive(ids.find((id) => visible.has(id)) ?? "");
       },
-      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+      { rootMargin: "-20% 0px -60% 0px" }
     );
-
-    sectionIds.forEach((id) => {
+    ids.forEach((id) => {
       const el = document.getElementById(id);
-      if (el) observerRef.current!.observe(el);
+      if (el) io.observe(el);
     });
-
-    return () => observerRef.current?.disconnect();
+    return () => io.disconnect();
   }, []);
-
-  const handleNav = (href: string) => {
-    setMobileOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border shadow-lg shadow-black/10"
-          : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 border-b ${
+        scrolled || open ? "bg-paper/95 backdrop-blur-sm border-ink/20" : "bg-transparent border-transparent"
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className="font-bold text-xl tracking-tight py-2"
-        >
-          <span className="text-teal-ink">KG</span>
-          <span className="text-foreground">.</span>
+      <nav aria-label="Primary" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between">
+        <a href="#" className="font-display text-2xl leading-none py-2" aria-label="Kush Garg, back to top">
+          K<span className="text-serial">·</span>G
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.href.slice(1);
+        <ul className="hidden md:flex items-center gap-1">
+          {navLinks.map((l) => {
+            const isActive = active === l.href.slice(1);
             return (
-              <button
-                key={link.href}
-                onClick={() => handleNav(link.href)}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 cursor-pointer ${
-                  isActive
-                    ? "text-teal-ink bg-teal/10"
-                    : "text-muted-foreground hover:text-teal-ink hover:bg-teal/8"
-                }`}
-              >
-                {link.label}
-                {isActive && (
-                  <span className="block h-0.5 mt-0.5 rounded-full bg-teal" />
-                )}
-              </button>
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`px-3 py-2 text-sm transition-colors underline-offset-[0.5em] decoration-1 ${isActive ? "text-ink underline" : "text-ink-soft hover:text-ink"}`}
+                >
+                  {l.label}
+                </a>
+              </li>
             );
           })}
-        </div>
+        </ul>
 
-        {/* Right side */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={toggle}
-            aria-label="Toggle theme"
-            className="p-3.5 rounded-lg text-muted-foreground hover:text-teal-ink hover:bg-teal/10 transition-all duration-200 cursor-pointer"
-          >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-
           <a
-            href="/KushGarg_Resume.pdf"
+            href={RESUME}
             download
-            className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-teal text-teal-ink hover:bg-teal hover:text-white transition-all duration-200"
+            className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium border border-ink rounded-[2px] hover:bg-ink hover:text-paper transition-colors"
           >
-            Resume
+            Résumé
           </a>
-
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
             aria-controls="mobile-menu"
-            className="md:hidden p-3 rounded-lg text-muted-foreground hover:text-teal-ink transition-colors cursor-pointer"
+            className="md:hidden p-3 -mr-2 text-ink"
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div id="mobile-menu" className="md:hidden bg-background/95 backdrop-blur-md border-b border-border px-4 pb-4 pt-2">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.href.slice(1);
-            return (
-              <button
-                key={link.href}
-                onClick={() => handleNav(link.href)}
-                className={`block w-full text-left px-3 py-3 text-sm font-medium transition-colors cursor-pointer border-b border-border/50 last:border-0 ${
-                  isActive
-                    ? "text-teal-ink font-semibold"
-                    : "text-muted-foreground hover:text-teal-ink"
-                }`}
-              >
-                {isActive && <span className="mr-1.5">›</span>}
-                {link.label}
-              </button>
-            );
-          })}
-          <a
-            href="/KushGarg_Resume.pdf"
-            download
-            className="mt-3 flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-teal text-teal-ink hover:bg-teal hover:text-white transition-all duration-200"
-          >
-            Download Resume
+      {open && (
+        <div id="mobile-menu" className="md:hidden px-4 pb-5 border-t border-ink/15">
+          <ul>
+            {navLinks.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3.5 border-b border-ink/10 font-display text-2xl"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a href={RESUME} download className="mt-4 flex justify-center px-4 py-3 bg-ink text-paper rounded-[2px] font-medium">
+            Download résumé
           </a>
         </div>
       )}

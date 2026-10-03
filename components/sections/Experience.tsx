@@ -1,19 +1,20 @@
-import { MapPin, Calendar } from "lucide-react";
+import { SectionHead } from "@/components/Print";
 
-const experiences = [
+// Set as a statement of account: dated entries, ruled, newest first.
+const entries = [
   {
     role: "Software Engineer II",
     company: "StoneX Group",
     location: "Pune, IN",
-    period: "Aug 2024 – Present",
-    current: true,
+    from: "Aug 2024",
+    to: "Present",
     bullets: [
-      "Own end-to-end delivery of the Funding as a Service (FAAS) pipeline — centralized payment platform serving all StoneX entities with full ACK/NACK lifecycle management",
-      "Built ISO 20022 message generation layer (pacs.008, pacs.009, pain.001) ingesting TMSJson payloads from Treasury Management Systems and delivering to the SWIFT network",
-      "Engineered SWIFT message processing layer supporting 7+ message types across legacy MT (MT900, MT910, MT942) and modern MX (CAMT.053, CAMT.054) formats",
-      "Co-drove XPAY to production (Feb 2025) — processing cross-border payments from the CONNECT app and broker initiations, enabling $600M in operational savings",
-      "Proposed AI cost-reduction architecture using GraphDB + VectorDB + MCP with CI/CD automation to eliminate redundant LLM token consumption",
-      "Led team of 5 to 2nd place at StoneX India Hackathon (Nov 2025) — built an AI ops tool with multilingual chatbot and interactive dashboard for operations users",
+      "Own end-to-end delivery of the Funding as a Service (FAAS) pipeline: a centralized payment platform serving all StoneX entities with full ACK/NACK lifecycle management.",
+      "Built the ISO 20022 message generation layer (pacs.008, pacs.009, pain.001), ingesting TMSJson payloads from Treasury Management Systems and delivering to the SWIFT network.",
+      "Engineered SWIFT message processing for 7+ message types across legacy MT (MT900, MT910, MT942) and MX (CAMT.053, CAMT.054) formats.",
+      "Co-drove XPAY to production (Feb 2025), processing cross-border payments from the CONNECT app and broker initiations, enabling $600M in operational savings.",
+      "Proposed an AI cost-reduction architecture using GraphDB + VectorDB + MCP with CI/CD automation to eliminate redundant LLM token consumption.",
+      "Led a team of 5 to 2nd place at the StoneX India Hackathon (Nov 2025) with an AI ops tool: multilingual chatbot and interactive dashboard for operations users.",
     ],
     tags: ["Spring Boot", "Java", "SWIFT ISO 20022", "Microservices", "Azure DevOps"],
   },
@@ -21,11 +22,11 @@ const experiences = [
     role: "Software Engineering Intern",
     company: "StoneX Group",
     location: "Pune, IN",
-    period: "Jan 2024 – Jul 2024",
-    current: false,
+    from: "Jan 2024",
+    to: "Jul 2024",
     bullets: [
-      "Core contributor to XPAY — built Spring Boot REST APIs, transaction logic, compliance hooks, and audit trails forming the foundation of its production payment architecture",
-      "Delivered CI/CD pipelines on Azure DevOps in coordination with DevOps and InfoSec teams",
+      "Core contributor to XPAY: Spring Boot REST APIs, transaction logic, compliance hooks, and audit trails that became the foundation of its production payment architecture.",
+      "Delivered CI/CD pipelines on Azure DevOps in coordination with DevOps and InfoSec teams.",
     ],
     tags: ["Spring Boot", "Java", "CI/CD", "Azure DevOps"],
   },
@@ -33,93 +34,37 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Section header */}
-        <div data-reveal className="flex items-center gap-3 mb-12"
-        >
-          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">03.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold">Experience</h2>
-          <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
-        </div>
+    <section id="experience" aria-labelledby="experience-title" className="px-5 sm:px-10 lg:px-16 py-24 sm:py-32 bg-paper-deep/60">
+      <div className="max-w-6xl mx-auto">
+        <SectionHead id="experience" title="Experience" />
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-0 top-0 bottom-0 w-px bg-border hidden sm:block" style={{ left: "7px" }} />
-
-          <div className="space-y-10">
-            {experiences.map((exp) => (
-              <div data-reveal
-                key={`${exp.role}-${exp.period}`}
-                className="sm:pl-10 relative"
-              >
-                {/* Timeline dot */}
-                <div
-                  className={`absolute hidden sm:flex left-0 w-4 h-4 rounded-full border-2 items-center justify-center top-1.5 ${
-                    exp.current
-                      ? "bg-teal border-teal"
-                      : "bg-background border-border"
-                  }`}
-                  style={{ left: 0 }}
-                >
-                  {exp.current && (
-                    <span className="w-2 h-2 rounded-full bg-white" />
-                  )}
-                </div>
-
-                <div className="rounded-2xl border border-border bg-card p-6 card-hover">
-                  {/* Header */}
-                  <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-lg font-bold text-foreground">{exp.role}</h3>
-                        {exp.current && (
-                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-teal/10 text-teal-ink border border-teal/20">
-                            Current
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-teal-ink font-semibold mt-0.5">{exp.company}</p>
-                    </div>
-                    <div className="text-right text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1.5 justify-end">
-                        <Calendar size={13} />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center gap-1.5 justify-end mt-1">
-                        <MapPin size={13} />
-                        {exp.location}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bullets */}
-                  <ul className="space-y-2.5 mb-5">
-                    {exp.bullets.map((b, bi) => (
-                      <li key={bi} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
-                        <span className="text-teal-ink mt-1 flex-shrink-0">▸</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 rounded-lg text-xs font-medium bg-teal/8 text-teal-ink border border-teal/15"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+        <ol className="border-t-2 border-ink">
+          {entries.map((e) => (
+            <li data-print key={e.role} className="grid md:grid-cols-[11rem_minmax(0,1fr)] gap-x-10 gap-y-3 py-10 border-b border-ink/25">
+              <p className="font-mono tabular text-sm text-ink-soft leading-relaxed">
+                {e.from}
+                <span aria-hidden="true"> – </span>
+                <span className="sr-only"> to </span>
+                <span className={e.to === "Present" ? "text-ink font-medium" : ""}>{e.to}</span>
+              </p>
+              <div>
+                <h3 className="font-display text-2xl sm:text-3xl leading-tight">{e.role}</h3>
+                <p className="mt-1 legend text-[0.72rem] text-ink-soft">
+                  {e.company} · {e.location}
+                </p>
+                <ul className="mt-6 space-y-3 max-w-[72ch]">
+                  {e.bullets.map((b) => (
+                    <li key={b} className="grid grid-cols-[1.1rem_1fr] text-[0.98rem] leading-relaxed text-ink-soft">
+                      <span aria-hidden="true" className="block mt-[0.8em] h-px w-2.5 bg-ink/60" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 font-mono text-[0.7rem] text-ink-faint">{e.tags.join("  ·  ")}</p>
               </div>
-            ))}
-          </div>
-        </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

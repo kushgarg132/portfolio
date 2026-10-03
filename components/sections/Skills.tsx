@@ -1,87 +1,31 @@
-import { Code2, Database, Brain, Server, Globe, Layers } from "lucide-react";
+import { SectionHead } from "@/components/Print";
 
-const skillGroups = [
-  {
-    icon: <Code2 size={20} />,
-    title: "Languages",
-    color: "#007A87",
-    skills: ["Java", "Python", "TypeScript", "JavaScript", "SQL", "C++"],
-  },
-  {
-    icon: <Layers size={20} />,
-    title: "Frameworks",
-    color: "#0891b2",
-    skills: ["Spring Boot", "Spring Security", "Spring WebSocket", "Spring Cloud Gateway", "FastAPI", "Node.js", "React", "Next.js"],
-  },
-  {
-    icon: <Database size={20} />,
-    title: "Databases",
-    color: "#0e7490",
-    skills: ["MongoDB", "PostgreSQL", "Redis", "MySQL"],
-  },
-  {
-    icon: <Brain size={20} />,
-    title: "AI / ML",
-    color: "#7c3aed",
-    skills: ["LangChain", "LangGraph", "Gemini Pro", "TA-Lib", "scikit-learn"],
-  },
-  {
-    icon: <Server size={20} />,
-    title: "Infrastructure",
-    color: "#047857",
-    skills: ["Docker", "Kafka", "Azure DevOps", "GitHub Actions", "CI/CD", "Agile", "Scrum"],
-  },
-  {
-    icon: <Globe size={20} />,
-    title: "SWIFT / Domain",
-    color: "#b45309",
-    skills: ["ISO 20022", "pacs.008", "pacs.009", "pain.001", "CAMT.053", "CAMT.054", "MT900/910/942"],
-  },
+// A dense schedule, like the denomination tables on the back of a note.
+const groups = [
+  { title: "Languages", skills: ["Java", "Python", "TypeScript", "JavaScript", "SQL", "C++"] },
+  { title: "Frameworks", skills: ["Spring Boot", "Spring Security", "Spring WebSocket", "Spring Cloud Gateway", "FastAPI", "Node.js", "React", "Next.js"] },
+  { title: "Data", skills: ["PostgreSQL", "MongoDB", "Redis", "MySQL"] },
+  { title: "AI / ML", skills: ["LangGraph", "LangChain", "Gemini Pro", "TA-Lib", "scikit-learn"] },
+  { title: "Infrastructure", skills: ["Docker", "Kafka", "Azure DevOps", "GitHub Actions", "CI/CD", "Agile", "Scrum"] },
+  { title: "SWIFT", skills: ["ISO 20022", "pacs.008", "pacs.009", "pain.001", "CAMT.053", "CAMT.054", "MT900 / 910 / 942"] },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-card/30">
+    <section id="skills" aria-labelledby="skills-title" className="px-5 sm:px-10 lg:px-16 py-24 sm:py-32 bg-ink text-paper">
       <div className="max-w-6xl mx-auto">
-        {/* Section header */}
-        <div data-reveal className="flex items-center gap-3 mb-12"
-        >
-          <span className="text-sm font-mono text-teal-ink tracking-widest uppercase">02.</span>
-          <h2 className="text-3xl sm:text-4xl font-bold">Skills</h2>
-          <div className="flex-1 h-px bg-border ml-4 hidden sm:block" />
+        <div className="[&_h2]:text-paper [&_.microprint]:text-paper/50">
+          <SectionHead id="skills" title="Skills" />
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skillGroups.map((group) => (
-            <div data-reveal
-              key={group.title}
-              className="rounded-2xl border border-border bg-card p-6 card-hover group"
-            >
-              {/* Header */}
-              <div className="flex items-center gap-3 mb-5">
-                <div
-                  className="p-2 rounded-lg transition-colors duration-200"
-                  style={{ backgroundColor: `${group.color}15`, color: group.color }}
-                >
-                  {group.icon}
-                </div>
-                <h3 className="font-semibold text-foreground">{group.title}</h3>
-              </div>
-
-              {/* Skills */}
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-2.5 py-1 rounded-lg text-xs font-medium bg-background border border-border text-muted-foreground group-hover:border-border/80 transition-colors duration-200"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+        <dl className="grid md:grid-cols-2 gap-x-16 border-t-2 border-paper/80">
+          {groups.map((g) => (
+            <div data-print key={g.title} className="grid grid-cols-[9.75rem_1fr] gap-4 py-5 border-b border-paper/20">
+              <dt className="legend text-[0.68rem] text-paper/70 pt-1">{g.title}</dt>
+              <dd className="text-[0.98rem] leading-relaxed">{g.skills.join(", ")}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );

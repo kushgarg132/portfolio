@@ -1,241 +1,135 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { ArrowDown, Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
+import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
+import Rosette from "@/components/Rosette";
+import { Band, Microprint } from "@/components/Print";
+import { RESUME, dest, socials } from "@/lib/site";
 
-const ROLES = [
-  "Backend Engineer",
-  "SWIFT ISO 20022 Specialist",
-  "Distributed Systems Engineer",
-  "AI/LLM Systems Builder",
+// Each figure carries the line it comes from, so nothing on the note is a bare claim.
+const denominations = [
+  { figure: "$600M", label: "savings enabled by XPAY", source: "StoneX · in production since Feb 2025", hot: true },
+  { figure: "7+", label: "SWIFT message types handled", source: "MT900 · MT910 · MT942 · CAMT.053 · CAMT.054" },
+  { figure: "3", label: "side projects live today", source: "NeoTrade · Betrix · RoutineOS" },
 ];
 
-function GridBackground() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div
-        className="absolute inset-0 opacity-30 dark:opacity-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,122,135,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0,122,135,0.15) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 0% 0%, rgba(0,122,135,0.07), transparent 30rem), radial-gradient(circle at 100% 100%, rgba(0,122,135,0.05), transparent 30rem)",
-        }}
-      />
-    </div>
-  );
-}
-
-function usePrefersReducedMotion() {
-  const [reduce, setReduce] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduce(mq.matches);
-    const onChange = () => setReduce(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-  return reduce;
-}
-
-function Typewriter() {
-  const reduce = usePrefersReducedMotion();
-  const [index, setIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    if (reduce) return;
-    const current = ROLES[index];
-    let timeout: ReturnType<typeof setTimeout>;
-
-    if (!deleting && displayed.length < current.length) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 60);
-    } else if (!deleting && displayed.length === current.length) {
-      timeout = setTimeout(() => setDeleting(true), 2000);
-    } else if (deleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 35);
-    } else if (deleting && displayed.length === 0) {
-      setDeleting(false);
-      setIndex((i) => (i + 1) % ROLES.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, deleting, index, reduce]);
-
-  if (reduce) {
-    return <span className="text-teal-ink font-semibold">{ROLES[0]} · {ROLES[2]}</span>;
-  }
-
-  return (
-    <>
-      <span className="sr-only">{ROLES.join(", ")}</span>
-      <span aria-hidden="true" className="text-teal-ink font-semibold">
-        {displayed}
-        <span className="animate-blink ml-0.5 text-teal-ink">|</span>
-      </span>
-    </>
-  );
-}
-
-function ProfilePhoto() {
-  return (
-    <div className="relative flex-shrink-0 flex items-center justify-center animate-fade-in">
-      {/* Outer glow ring */}
-      <div className="absolute -inset-8 rounded-full" style={{ backgroundImage: "radial-gradient(closest-side, rgba(0,122,135,0.25), transparent)" }} />
-
-      {/* Rotating dashed ring */}
-      <div
-        className="absolute inset-[-6px] rounded-full border-2 border-dashed border-teal/40"
-        style={{ animation: "spin 20s linear infinite" }}
-      />
-
-      {/* Solid teal ring */}
-      <div className="absolute inset-[-3px] rounded-full border-2 border-teal/60" />
-
-      {/* Photo container */}
-      <div className="relative w-52 h-52 sm:w-60 sm:h-60 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-teal/30 shadow-2xl shadow-teal/20">
-        <Image
-          src="/kush.jpg"
-          alt="Kush Garg"
-          fill
-          sizes="(min-width: 1024px) 288px, (min-width: 640px) 240px, 208px"
-          className="object-cover object-top"
-          priority
-        />
-      </div>
-    </div>
-  );
-}
+const icons: Record<string, React.ReactNode> = {
+  GitHub: <Github size={18} />,
+  LinkedIn: <Linkedin size={18} />,
+  Email: <Mail size={18} />,
+};
 
 export default function Hero() {
-  const scrollToAbout = () => {
-    document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section className="relative min-h-dvh flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-16">
-      <GridBackground />
+    <section aria-label="Introduction" className="relative px-3 sm:px-6 lg:px-10 pt-[4.25rem] sm:pt-20 pb-10 lg:min-h-dvh flex flex-col">
+      {/* the note */}
+      <div
+        data-hero-note
+        className="relative flex-1 flex flex-col max-w-7xl w-full mx-auto border border-ink/70 outline outline-1 outline-offset-4 outline-ink/30 rounded-[3px] bg-paper underprint overflow-hidden"
+      >
+        <Band />
+        <Microprint className="px-4 py-1 border-b border-ink/15" />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto">
-        {/* Two-column layout: text left, photo right */}
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-12 lg:gap-16">
-
-          {/* Left: Text content */}
-          <div className="flex-1 text-center lg:text-left max-w-xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal/30 bg-teal/8 text-teal-ink text-sm font-medium mb-6 lg:hidden">
-              <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-              Open to remote &amp; relocation
+        <div className="relative flex-1 grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-5 lg:gap-4 px-5 sm:px-10 lg:px-14 py-5 sm:py-8 lg:py-6">
+          {/* portrait on its rosette */}
+          <div className="relative mx-auto w-[min(50vw,210px)] sm:w-[300px] lg:w-[min(30vw,400px)] aspect-square">
+            <Rosette id="hero-plate" draw className="absolute inset-[-14%] w-[128%] h-[128%]" />
+            <div data-hero-portrait className="absolute inset-y-[4%] inset-x-[14%]">
+              <Image
+                src="/kush-engraved.png"
+                alt="Engraved portrait of Kush Garg"
+                fill
+                priority
+                sizes="(min-width: 1024px) 300px, 60vw"
+                className="object-contain"
+              />
             </div>
+          </div>
 
-            {/* Name */}
-            <h1
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-4"
-            >
-              Kush{" "}
-<span className="text-teal-ink">Garg</span>
+          {/* legend */}
+          <div className="text-center lg:text-left">
+            <h1 data-hero-item className="font-display text-[clamp(3.25rem,9vw,6rem)] leading-[0.9] tracking-[-0.02em]">
+              Kush Garg
             </h1>
-
-            {/* Typewriter */}
-            <div className="text-xl sm:text-2xl font-medium h-9 mb-5">
-              <Typewriter />
-            </div>
-
-            {/* Bio */}
-            <p
-              className="text-muted-foreground text-base sm:text-lg max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
-            >
-              Building payment infrastructure at StoneX.{" "}
-              <span className="text-teal-ink">SWIFT</span> ·{" "}
-              <span className="text-teal-ink">Microservices</span> ·{" "}
-              <span className="text-teal-ink">Multi-agent AI</span>.
+            <p data-hero-item className="legend text-[0.8rem] sm:text-sm text-ink-soft mt-3 sm:mt-4">
+              Backend + AI Systems Engineer
+            </p>
+            <p data-hero-item className="mt-4 sm:mt-5 text-base sm:text-xl leading-snug max-w-[34ch] mx-auto lg:mx-0">
+              I build SWIFT ISO 20022 payment infrastructure at StoneX Group, and multi-agent AI and
+              distributed systems that are live today.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-8">
-              <button
-                onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-6 py-3 rounded-xl bg-teal text-white font-medium hover:bg-teal-dark transition-all duration-200 hover:shadow-lg hover:shadow-teal/30 cursor-pointer"
-              >
-                View Projects
-              </button>
-              <a
-                href="/KushGarg_Resume.pdf"
-                download
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-teal text-teal-ink font-medium hover:bg-teal hover:text-white transition-all duration-200 cursor-pointer"
-              >
-                <Download size={16} />
-                Download Resume
+            {/* phones: the actions come before the figures so they land in the first viewport */}
+            <div data-hero-item className="lg:hidden mt-5 flex justify-center gap-3">
+              <a href={RESUME} download className="inline-flex items-center gap-2 px-5 py-3 bg-ink text-paper rounded-[2px] font-medium">
+                <Download size={16} aria-hidden="true" />
+                Download résumé
               </a>
-              <button
-                onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-6 py-3 rounded-xl border border-border text-foreground font-medium hover:border-teal hover:text-teal-ink transition-all duration-200 cursor-pointer"
-              >
-                Contact Me
-              </button>
+              <a href="#contact" className="inline-flex items-center px-5 py-3 border border-ink rounded-[2px] font-medium">
+                Contact
+              </a>
             </div>
 
-            {/* Social links */}
-            <div className="flex items-center justify-center lg:justify-start gap-4">
-              {[
-                { icon: <Github size={20} />, href: "https://github.com/kushgarg132", label: "GitHub" },
-                { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/kush-garg-809617208/", label: "LinkedIn" },
-                { icon: <Mail size={20} />, href: "mailto:gargkush2003@gmail.com", label: "Email" },
-              ].map(({ icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="p-3 rounded-lg text-muted-foreground hover:text-teal-ink hover:bg-teal/10 transition-all duration-200 cursor-pointer"
-                >
-                  {icon}
-                </a>
+            <dl className="mt-8 grid sm:grid-cols-3 border-y border-ink/25 divide-y sm:divide-y-0 sm:divide-x divide-ink/25 text-left">
+              {denominations.map((d) => (
+                <div data-hero-item key={d.figure} className="grid grid-cols-[7.75rem_1fr] sm:block gap-x-4 items-baseline py-4 sm:px-5 sm:first:pl-0">
+                  <dt className="sr-only">{d.label}</dt>
+                  <dd className="contents sm:block">
+                    <span className={`block font-display tabular text-[2.2rem] sm:text-5xl leading-none ${d.hot ? "text-serial" : ""}`}>
+                      {/* Bodoni's hairline "+" vanishes at this size; set it in the sans */}
+                      {d.figure.replace("+", "")}
+                      {d.figure.endsWith("+") && <span className="font-sans font-light text-[0.6em] align-[0.35em]">+</span>}
+                    </span>
+                    <span>
+                      <span className="block sm:mt-2 text-sm leading-tight">{d.label}</span>
+                      <span className="block mt-1.5 font-mono text-[0.62rem] leading-snug text-ink-faint">{d.source}</span>
+                    </span>
+                  </dd>
+                </div>
               ))}
-              <span className="text-sm text-muted-foreground ml-2 hidden sm:inline-flex items-center gap-1">
-                <MapPin size={14} aria-hidden="true" />
-                Pune, IN
-              </span>
-            </div>
-          </div>
-
-          {/* Right: Photo */}
-          <div className="flex flex-col items-center gap-6">
-            {/* Desktop badge */}
-            <div className="hidden lg:inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-teal/30 bg-teal/8 text-teal-ink text-sm font-medium">
-              <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-              Open to remote &amp; relocation
-            </div>
-
-            <ProfilePhoto />
+            </dl>
           </div>
         </div>
+
+        {/* serial band: identity number, the actions, where to find me */}
+        <div className="border-t border-ink/25 px-5 sm:px-10 lg:px-14 py-5 flex flex-wrap items-center gap-x-6 gap-y-4 justify-center lg:justify-between">
+          <p data-hero-item className="font-mono text-serial tabular text-sm tracking-[0.2em]">
+            <span aria-hidden="true">KG 2024 0600</span>
+            <span className="ml-4 tracking-normal text-ink-soft font-sans text-sm">Open to remote &amp; relocation · Pune, IN</span>
+          </p>
+          <div data-hero-item className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={RESUME}
+              download
+              className="hidden lg:inline-flex items-center gap-2 px-5 py-3 bg-ink text-paper rounded-[2px] font-medium hover:bg-serial transition-colors"
+            >
+              <Download size={16} aria-hidden="true" />
+              Download résumé
+            </a>
+            <a href="#contact" className="hidden lg:inline-flex items-center px-5 py-3 border border-ink rounded-[2px] font-medium hover:bg-ink hover:text-paper transition-colors">
+              Contact
+            </a>
+            <span className="flex">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  title={dest(s.href)}
+                  className="p-3 text-ink-soft hover:text-serial transition-colors"
+                >
+                  {icons[s.label]}
+                </a>
+              ))}
+            </span>
+          </div>
+        </div>
+        <Band className="rotate-180" />
       </div>
 
-      {/* Scroll indicator */}
-      <button
-        onClick={scrollToAbout}
-        className="hidden sm:block absolute bottom-6 left-1/2 -translate-x-1/2 p-3 rounded-full text-muted-foreground hover:text-teal-ink transition-colors cursor-pointer"
-        aria-label="Scroll down"
-      >
-        <ArrowDown size={20} />
-      </button>
-
-      <style jsx>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
+      <a href="#about" aria-label="Scroll to about" className="hidden sm:flex mx-auto mt-4 p-2 text-ink-faint hover:text-serial transition-colors">
+        <ArrowDown size={18} />
+      </a>
     </section>
   );
 }

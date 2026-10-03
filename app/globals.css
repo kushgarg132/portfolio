@@ -4,111 +4,89 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.625rem;
-    --teal: #007A87;
-    --teal-light: #00A3B4;
-    /* teal for text: #006B77, 6.2:1 on white, >5:1 on teal/10 tints */
-    --teal-ink: 0 107 119;
+    /* note stock: a cool mint tint, like the green underprint of a bond */
+    --paper: #dde7e1;
+    --paper-deep: #cfdcd5;
+    /* intaglio ink (the engraved portrait uses the same value) */
+    --ink: #142640;
+    --ink-soft: #33485c;   /* 7.4:1 on paper */
+    --ink-faint: #5a6d78;  /* 4.6:1 on paper, labels only */
+    /* the one accent: serial-number vermilion, reserved for the figure under pressure */
+    --serial: #b0261c;
+    /* rainbow-printing tints for guilloche linework */
+    --tint-green: #6f9c8a;
+    --tint-rose: #c27c95;
+    color-scheme: light;
   }
 
-  .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 96%;
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 96%;
-    --muted: 217 32% 14%;
-    --muted-foreground: 215 20% 60%;
-    --border: 217 32% 14%;
-    --ring: 212 97% 87%;
-    --teal: #007A87;
-    --teal-light: #00A3B4;
-    /* #007A87 is only 3.8:1 on the dark background; #00A3B4 is 6.4:1 */
-    --teal-ink: 0 163 180;
-  }
-
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--paper);
+    color: var(--ink);
     font-family: var(--font-sans), system-ui, sans-serif;
+    font-variation-settings: "wdth" 100;
+    /* Archivo's variable fi ligature renders with a gap at body sizes */
+    font-variant-ligatures: no-common-ligatures;
+    word-spacing: 0.05em;
+    text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
 }
 
-/* Custom utilities */
-.teal-glow {
-  box-shadow: 0 0 20px rgba(0, 122, 135, 0.3), 0 0 60px rgba(0, 122, 135, 0.1);
+/* fine underprint over the whole sheet: two crossing wave fields, barely there */
+.underprint {
+  background-image:
+    repeating-radial-gradient(circle at 18% 30%, transparent 0 7px, rgb(111 156 138 / 0.07) 7px 8px),
+    repeating-radial-gradient(circle at 82% 70%, transparent 0 9px, rgb(194 124 149 / 0.06) 9px 10px);
 }
 
-.card-hover {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+/* microprint: text too small to photocopy, used as rules */
+.microprint {
+  font-family: var(--font-mono), monospace;
+  font-size: 6.5px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--ink-faint);
+  user-select: none;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 122, 135, 0.15);
+/* extended caps for legends */
+.legend {
+  font-variation-settings: "wdth" 125;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
 }
 
-.animate-blink {
-  animation: blink 1s step-end infinite;
+.tabular { font-variant-numeric: tabular-nums lining-nums; }
+
+/* links: underline that sits low, ink-thin */
+.ink-link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+  text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+.ink-link:hover { text-decoration-color: currentColor; }
+
+/* perforation edge, as on a tear-off slip */
+.perforated {
+  background-image: radial-gradient(circle, rgb(20 38 64 / 0.3) 1.6px, transparent 2.2px);
+  background-size: 10px 8px;
+  background-repeat: repeat-x;
 }
 
-/* Scroll reveal: native scroll-driven animation, zero JS. Browsers without
-   animation-timeline support just show the content. */
-@supports (animation-timeline: view()) {
-  [data-reveal] {
-    animation: reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 35%;
-  }
-}
-
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(16px); }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #007A87; border-radius: 3px; }
-
-/* Selection */
-::selection { background: rgba(0, 163, 180, 0.3); color: inherit; }
-
-/* Keyboard focus */
-:focus-visible { outline: 2px solid rgb(var(--teal-ink)); outline-offset: 2px; border-radius: 6px; }
-
-/* Accent-colored text (project/achievement accents): pushed toward black in light mode and
-   toward white in dark mode so every accent (green, amber, ...) clears 4.5:1 */
-.accent-ink { color: color-mix(in oklab, var(--accent) 65%, black); }
-.dark .accent-ink { color: color-mix(in oklab, var(--accent) 55%, white); }
+::selection { background: rgb(176 38 28 / 0.18); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--serial); outline-offset: 3px; }
+* { caret-color: var(--serial); scrollbar-color: var(--ink-soft) var(--paper-deep); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  /* stop decorative loops; keep short state transitions (hover/focus feedback) */
-  *, *::before, *::after {
-    animation: none !important;
-  }
 }

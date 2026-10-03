@@ -1,41 +1,29 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Microprint } from "@/components/Print";
+import { socials } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-center sm:text-left">
-          <p className="font-bold text-lg">
-            <span className="text-teal-ink">KG</span>
-            <span className="text-foreground">.</span>
-          </p>
-          <p className="text-xs text-muted-foreground mt-1">
-            Built with Next.js · Tailwind CSS
-          </p>
-        </div>
-
-        <div className="flex items-center gap-4">
-          {[
-            { icon: <Github size={18} />, href: "https://github.com/kushgarg132", label: "GitHub" },
-            { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/in/kush-garg-809617208/", label: "LinkedIn" },
-            { icon: <Mail size={18} />, href: "mailto:gargkush2003@gmail.com", label: "Email" },
-          ].map(({ icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="p-3.5 rounded-lg text-muted-foreground hover:text-teal-ink hover:bg-teal/10 transition-all duration-200 cursor-pointer"
-            >
-              {icon}
-            </a>
-          ))}
-        </div>
-
-        <p className="text-xs text-muted-foreground text-center sm:text-right">
-          © {new Date().getFullYear()} Kush Garg. All rights reserved.
+    <footer className="bg-ink text-paper">
+      <Microprint className="!text-paper/40 py-1.5 border-b border-paper/15" />
+      <div className="max-w-6xl mx-auto px-5 sm:px-10 lg:px-16 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <p className="font-display text-2xl leading-none">
+          K<span className="text-[#e46a5c]">·</span>G
         </p>
+        <ul className="flex gap-6 text-sm">
+          {socials.map((s) => (
+            <li key={s.label}>
+              <a
+                href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="ink-link py-2 hover:!text-paper"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="text-xs text-paper/60 tabular">© {new Date().getFullYear()} Kush Garg</p>
       </div>
     </footer>
   );
