@@ -90,3 +90,10 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* Bodoni Moda's auto optical size goes to near-invisible hairlines at display sizes;
+   pin a sturdier cut so thin strokes survive on 1x screens */
+.font-display {
+  font-variation-settings: "opsz" 28;
+  font-weight: 500;
+}
