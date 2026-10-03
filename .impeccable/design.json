@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-03T18:52:42+00:00",
+  "title": "Design System: Kush Garg Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Note Stock",
+        "canonical": "#dde7e1",
+        "oklch": "oklch(91.9% 0.013 159.9)",
+        "tonalRamp": [
+          "#080d0a",
+          "#212723",
+          "#3d4440",
+          "#5b645f",
+          "#7c8580",
+          "#9fa7a2",
+          "#c3cbc7",
+          "#e9f1ec"
+        ]
+      },
+      "paper-deep": {
+        "role": "neutral",
+        "displayName": "Deep Stock",
+        "canonical": "#cfdcd5",
+        "oklch": "oklch(88.3% 0.017 162.7)",
+        "tonalRamp": [
+          "#070d0a",
+          "#1f2723",
+          "#3b4540",
+          "#59645e",
+          "#7a867f",
+          "#9da8a2",
+          "#c1ccc6",
+          "#e7f1ec"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Intaglio Ink",
+        "canonical": "#142640",
+        "oklch": "oklch(26.8% 0.054 257.6)",
+        "tonalRamp": [
+          "#020b1c",
+          "#17253b",
+          "#31435c",
+          "#4e627f",
+          "#6f84a2",
+          "#92a7c4",
+          "#b7cbe7",
+          "#def0ff"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#33485c",
+        "oklch": "oklch(39.3% 0.043 247.8)",
+        "tonalRamp": [
+          "#020c18",
+          "#172736",
+          "#314456",
+          "#4f6478",
+          "#6f859b",
+          "#92a8bd",
+          "#b7cce0",
+          "#def1ff"
+        ]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Faint Ink",
+        "canonical": "#5a6d78",
+        "oklch": "oklch(52.3% 0.029 233.5)",
+        "tonalRamp": [
+          "#030d13",
+          "#19272f",
+          "#35454e",
+          "#52646f",
+          "#738691",
+          "#96a8b3",
+          "#bbccd6",
+          "#e1f1fb"
+        ]
+      },
+      "serial": {
+        "role": "secondary",
+        "displayName": "Serial Vermilion",
+        "canonical": "#b0261c",
+        "oklch": "oklch(49.6% 0.176 29.2)",
+        "tonalRamp": [
+          "#300000",
+          "#580000",
+          "#820000",
+          "#ad291f",
+          "#d55042",
+          "#f87a69",
+          "#ffa391",
+          "#ffccba"
+        ]
+      },
+      "tint-green": {
+        "role": "tertiary",
+        "displayName": "Underprint Green",
+        "canonical": "#6f9c8a",
+        "oklch": "oklch(65.5% 0.056 167.9)",
+        "tonalRamp": [
+          "#001008",
+          "#082c21",
+          "#254b3d",
+          "#416b5b",
+          "#628d7c",
+          "#87b09f",
+          "#add3c3",
+          "#d4f8e9"
+        ]
+      },
+      "tint-rose": {
+        "role": "tertiary",
+        "displayName": "Underprint Rose",
+        "canonical": "#c27c95",
+        "oklch": "oklch(66.7% 0.092 356.9)",
+        "tonalRamp": [
+          "#1f000c",
+          "#401126",
+          "#642d43",
+          "#894a62",
+          "#ad6b83",
+          "#d08fa6",
+          "#f3b5ca",
+          "#ffdcef"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name on the note face only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section and project titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Roles, honour titles, the About lede, the mailto line."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Hero denominations and seal years, tabular lining."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running prose; ligatures off and word-spacing 0.05em (Archivo renders badly at 1x otherwise)."
+      },
+      "label": {
+        "displayName": "Legend",
+        "purpose": "Extended caps (wdth 125, uppercase) for definition terms, role lines, form labels."
+      },
+      "serial": {
+        "displayName": "Serial",
+        "purpose": "Identity numbers in vermilion."
+      },
+      "source": {
+        "displayName": "Source line",
+        "purpose": "Origin of a figure, link destinations, stacks, tags, dates."
+      },
+      "microprint": {
+        "displayName": "Microprint",
+        "purpose": "Repeated text used as a rule; aria-hidden, never content."
+      }
+    },
+    "shadows": [
+      {
+        "name": "slip-lift",
+        "value": "0 18px 40px -24px rgb(20 38 64 / 0.45)",
+        "purpose": "The contact slip only; every other document uses the double frame."
+      }
+    ],
+    "motion": [
+      {
+        "name": "plate-draw",
+        "value": "stroke-dashoffset 1 -> 0, 1.8s, power2.inOut, stagger 0.18s",
+        "purpose": "Load: guilloche rosette paths ([data-draw]) draw themselves once."
+      },
+      {
+        "name": "portrait-pass",
+        "value": "clip-path inset(0 0 100% 0) -> none, blur(6px) -> none, 1.3s, expo.out, at 0.35s",
+        "purpose": "Load: the engraved portrait is revealed by a top-down plate pass."
+      },
+      {
+        "name": "legend-set",
+        "value": "y 18px, autoAlpha 0 -> 1, 1s, expo.out, stagger 0.07s, at 0.5s",
+        "purpose": "Load: hero legend items ([data-hero-item]) set in sequence."
+      },
+      {
+        "name": "section-print",
+        "value": "clip-path inset(0 0 100% 0) -> inset(0), y 16px -> 0, 1.1s, expo.out, ScrollTrigger.batch start 'top 88%', stagger 0.12s, once",
+        "purpose": "Sections ([data-print]) print in on one axis, neighbours in sequence."
+      },
+      {
+        "name": "rosette-turn",
+        "value": "rotation 0 -> 40deg, scrub, top bottom -> bottom top",
+        "purpose": "Project plate rosettes (.spin-rosette) turn with scroll."
+      },
+      {
+        "name": "thread-fill",
+        "value": "scaleY (desktop) / scaleX (phone) 0 -> 1, ease none, scrub 0.4, page start -> max",
+        "purpose": "Security thread tracks reading progress; scroll-linked, not inside the reduced-motion gate."
+      },
+      {
+        "name": "state-transition",
+        "value": "0.15-0.2s ease (Tailwind transition-colors; ink-link 0.2s ease)",
+        "purpose": "Hover color changes on buttons, links, icons."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "gsap.matchMedia('(prefers-reduced-motion: no-preference)')",
+        "purpose": "Gates plate-draw, portrait-pass, legend-set, section-print and rosette-turn; CSS also drops smooth scrolling."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Download résumé and Send message: ink slab that turns vermilion on hover.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" x2=\"12\" y1=\"15\" y2=\"3\"/></svg>Download résumé</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--ink, #142640); color: var(--paper, #dde7e1); border: 0; border-radius: 2px; font-family: var(--font-sans), Archivo, system-ui, sans-serif; font-weight: 500; font-size: 1rem; cursor: pointer; transition: background-color 0.15s; } .ds-btn-primary:hover { background: var(--serial, #b0261c); } .ds-btn-primary:focus-visible { outline: 2px solid var(--serial, #b0261c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Contact and the nav résumé: 1px ink outline that fills with ink on hover.",
+      "html": "<a href=\"#contact\" class=\"ds-btn-outline\">Contact</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; padding: 12px 20px; border: 1px solid var(--ink, #142640); border-radius: 2px; color: var(--ink, #142640); background: transparent; text-decoration: none; font-family: var(--font-sans), Archivo, system-ui, sans-serif; font-weight: 500; transition: background-color 0.15s, color 0.15s; } .ds-btn-outline:hover { background: var(--ink, #142640); color: var(--paper, #dde7e1); } .ds-btn-outline:focus-visible { outline: 2px solid var(--serial, #b0261c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ink Link with Destination",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Low thin underline; outbound links show their host in a mono source line before commit.",
+      "html": "<a class=\"ds-dest\" href=\"https://github.com/kushgarg132\"><span class=\"ds-ink-link\">Read the source</span><span class=\"ds-dest-host\">github.com/kushgarg132</span></a>",
+      "css": ".ds-dest { display: inline-flex; flex-direction: column; color: var(--ink, #142640); text-decoration: none; font-family: var(--font-sans), Archivo, sans-serif; font-weight: 500; } .ds-ink-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.28em; text-decoration-color: color-mix(in oklab, currentColor 40%, transparent); transition: text-decoration-color 0.2s ease; } .ds-dest:hover .ds-ink-link { text-decoration-color: currentColor; } .ds-dest:focus-visible { outline: 2px solid var(--serial, #b0261c); outline-offset: 3px; } .ds-dest-host { font-family: var(--font-mono), 'Martian Mono', monospace; font-size: 0.62rem; font-weight: 400; color: var(--ink-faint, #5a6d78); margin-top: 2px; }"
+    },
+    {
+      "name": "Ruled Field",
+      "kind": "input",
+      "refersTo": "field-ruled",
+      "description": "Bottom-rule input under an extended-caps legend; the rule turns vermilion on focus.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-legend\">Your email</span><input type=\"email\" placeholder=\"you@company.com\"></label>",
+      "css": ".ds-field { display: block; } .ds-legend { font-family: var(--font-sans), Archivo, sans-serif; font-variation-settings: 'wdth' 125; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600; font-size: 0.66rem; color: var(--ink-soft, #33485c); } .ds-field input { display: block; width: 100%; background: transparent; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--ink, #142640) 50%, transparent); padding: 10px 0; font-size: 1rem; color: var(--ink, #142640); caret-color: var(--serial, #b0261c); transition: border-color 0.15s; } .ds-field input::placeholder { color: var(--ink-faint, #5a6d78); } .ds-field input:focus { outline: none; border-bottom-color: var(--serial, #b0261c); }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "K·G mark with the vermilion dot; soft-ink links, active section underlined in ink.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-mark\" href=\"#\">K<span>·</span>G</a><ul><li><a href=\"#about\">About</a></li><li><a href=\"#projects\" aria-current=\"true\">Projects</a></li><li><a href=\"#contact\">Contact</a></li></ul></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 24px; background: color-mix(in srgb, var(--paper, #dde7e1) 95%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink, #142640) 20%, transparent); } .ds-mark { font-family: var(--font-display), 'Bodoni Moda', Georgia, serif; font-size: 1.5rem; color: var(--ink, #142640); text-decoration: none; } .ds-mark span { color: var(--serial, #b0261c); } .ds-nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; } .ds-nav li a { padding: 8px 12px; font-family: var(--font-sans), Archivo, sans-serif; font-size: 0.875rem; color: var(--ink-soft, #33485c); text-decoration: none; transition: color 0.15s; } .ds-nav li a:hover { color: var(--ink, #142640); } .ds-nav li a[aria-current] { color: var(--ink, #142640); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.5em; } .ds-nav a:focus-visible { outline: 2px solid var(--serial, #b0261c); outline-offset: 3px; }"
+    },
+    {
+      "name": "Denomination",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "A Bodoni figure with its label and mono source line; vermilion only for $600M.",
+      "html": "<div class=\"ds-denom\"><span class=\"ds-fig ds-hot\">$600M</span><span class=\"ds-lbl\">savings enabled by XPAY</span><span class=\"ds-src\">StoneX · in production since Feb 2025</span></div>",
+      "css": ".ds-denom { display: flex; flex-direction: column; padding: 16px 20px 16px 0; border-top: 1px solid color-mix(in srgb, var(--ink, #142640) 25%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink, #142640) 25%, transparent); color: var(--ink, #142640); } .ds-fig { font-family: var(--font-display), 'Bodoni Moda', Georgia, serif; font-size: 3rem; line-height: 1; font-variant-numeric: tabular-nums lining-nums; } .ds-hot { color: var(--serial, #b0261c); } .ds-lbl { margin-top: 8px; font-family: var(--font-sans), Archivo, sans-serif; font-size: 0.875rem; line-height: 1.25; } .ds-src { margin-top: 6px; font-family: var(--font-mono), 'Martian Mono', monospace; font-size: 0.62rem; line-height: 1.375; color: var(--ink-faint, #5a6d78); }"
+    },
+    {
+      "name": "Specimen Note",
+      "kind": "card",
+      "refersTo": "note-frame",
+      "description": "A project issued in its own tint: double frame, tint washed into paper, status in tinted mono caps.",
+      "html": "<article class=\"ds-note\" style=\"--tint:#1d6a73\"><h3>Betrix</h3><p class=\"ds-sub\">AI-powered multiplayer poker platform</p><p class=\"ds-status\">LIVE · AI · REAL-TIME</p></article>",
+      "css": ".ds-note { padding: 36px; border: 1px solid var(--tint); outline: 1px solid color-mix(in oklab, var(--tint) 35%, transparent); outline-offset: 3px; border-radius: 3px; background: color-mix(in oklab, var(--paper, #dde7e1) 88%, var(--tint)); color: var(--ink, #142640); } .ds-note h3 { margin: 0; font-family: var(--font-display), 'Bodoni Moda', Georgia, serif; font-weight: 400; font-size: 3rem; line-height: 1; letter-spacing: -0.025em; } .ds-sub { margin: 8px 0 0; font-family: var(--font-sans), Archivo, sans-serif; font-size: 1.125rem; } .ds-status { margin: 20px 0 0; font-family: var(--font-mono), 'Martian Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; color: color-mix(in oklab, var(--tint) 70%, black); }"
+    },
+    {
+      "name": "Remittance Slip",
+      "kind": "card",
+      "refersTo": "note-frame",
+      "description": "Contact form as a perforated slip: the one lifted sheet, legend plus vermilion Nº serial.",
+      "html": "<div class=\"ds-slip\"><div class=\"ds-perf\"></div><div class=\"ds-slip-body\"><span class=\"ds-slip-legend\">Message to Kush Garg</span><span class=\"ds-slip-no\">Nº 0001</span></div></div>",
+      "css": ".ds-slip { background: var(--paper, #dde7e1); border: 1px solid color-mix(in srgb, var(--ink, #142640) 70%, transparent); border-radius: 3px; box-shadow: 0 18px 40px -24px rgb(20 38 64 / 0.45); } .ds-perf { height: 8px; margin-top: -4px; background-image: radial-gradient(circle, rgb(20 38 64 / 0.3) 1.6px, transparent 2.2px); background-size: 10px 8px; background-repeat: repeat-x; } .ds-slip-body { display: flex; justify-content: space-between; align-items: baseline; padding: 40px; } .ds-slip-legend { font-family: var(--font-sans), Archivo, sans-serif; font-variation-settings: 'wdth' 125; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600; font-size: 0.7rem; color: var(--ink, #142640); } .ds-slip-no { font-family: var(--font-mono), 'Martian Mono', monospace; font-size: 0.75rem; color: var(--serial, #b0261c); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Security Thread",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Fixed windowed metallic thread; its fill tracks scroll progress (vertical at the left edge on desktop, across the top on phones).",
+      "html": "<div class=\"ds-thread\"><div class=\"ds-thread-fill\"></div></div>",
+      "css": ".ds-thread { width: 5px; height: 160px; background: color-mix(in srgb, var(--ink, #142640) 10%, transparent); } .ds-thread-fill { width: 100%; height: 60%; background: repeating-linear-gradient(180deg, #9c6b3c 0 14px, #d9b48a 14px 18px, #7a8a90 18px 30px, transparent 30px 36px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Issued Note",
+    "overview": "The page is printed, not rendered. Every surface is a sheet of tinted note stock carrying deep intaglio ink, guilloche linework in two rainbow-printing tints, microprint used as rules, and a single vermilion reserved for serial numbers and the one figure under pressure. Sections are documents of the same issue: a note face for the introduction, a statement of account for experience, specimen notes for projects, a dense schedule for skills, embossed seals for honours, a perforated remittance slip for contact.\n\nDensity is that of a financial instrument: ruled lists, dated entries, definition tables, and figures that always sit beside the line they come from. Ornament is generated geometry (hypotrochoid rosettes, sine-strand bands, crossing wave underprint), never stock illustration. The portrait is an engraved line rendering in the same ink as the type (`public/kush-engraved.png`, produced by `scripts/engrave.py` from `public/kush.jpg`).\n\nThe system refuses the dark-navy-plus-accent developer template: no split hero over a card grid, no glow, no gradients-as-decoration. One committed light theme.",
+    "keyCharacteristics": [
+      "Cool mint note stock, never cream or white.",
+      "Didone engraving face for names, headings and figures; extended grotesque caps for legends; wide mono for serials and source lines.",
+      "Guilloche rosettes and bands as the only ornament, all computed in `lib/guilloche.ts`.",
+      "One accent ink (serial vermilion), rare by rule.",
+      "Hairline rules and double frames (border plus offset outline) instead of shadows.",
+      "Motion is printing: plates draw, sections pass under a plate, a security thread fills with reading progress."
+    ],
+    "rules": [
+      {
+        "name": "The Serial Ink Rule",
+        "body": "At rest, vermilion prints only three things: the $600M figure (hero denomination and its mention in About), serial numbers (the hero serial row, the slip's Nº), and the dot in the K·G mark. Everything else it touches is a state: focus ring, text selection at 18%, caret, error message, and the hover of the primary button and icon links. If a new element wants vermilion at rest, it is not the figure under pressure.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tint Is Linework Rule",
+        "body": "Green and rose exist as printed line, never as area. A surface wash comes from paper-deep or from a specimen tint mixed into paper, not from the underprint tints.",
+        "section": "colors"
+      },
+      {
+        "name": "The Clean Setting Rule",
+        "body": "Body sets `font-variant-ligatures: no-common-ligatures` and `word-spacing: 0.05em`; Archivo's variable fi ligature gaps and its word spaces close up at 1x. Keep both on any Archivo running text.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sourced Figure Rule",
+        "body": "A figure in Bodoni never stands alone: its label sits beside it and its mono source line sits under it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline Plus Rule",
+        "body": "Bodoni's hairline \"+\" disappears at figure size; set the plus in Archivo light at 0.6em, raised 0.35em.",
+        "section": "typography"
+      },
+      {
+        "name": "The Double Frame Rule",
+        "body": "A note is framed by a solid border and an offset outline at a third of its strength. Use that instead of elevation to say \"this is a document.\"",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** set every surface on note stock (paper, paper-deep, or a specimen tint mixed into paper) and every mark in ink.",
+      "**Do** frame documents with a 1px border plus an offset outline at roughly a third of the border's strength, at 3px radius.",
+      "**Do** give every headline figure its label and a mono source line.",
+      "**Do** generate ornament from `lib/guilloche.ts` and clone repeated geometry with `<use>`.",
+      "**Do** mark new reveal blocks with `data-print` so they join the one batched print-in, and keep new motion inside the reduced-motion gate.",
+      "**Do** add colors as hex vars in `globals.css` mapped through color-mix in `tailwind.config.ts`."
+    ],
+    "donts": [
+      "**Don't** print vermilion at rest on anything but the $600M figure, serial numbers, and the K·G dot.",
+      "**Don't** use the green or rose tints as text or area fills.",
+      "**Don't** set running prose in ink-faint or in microprint.",
+      "**Don't** use a cream or white ground, a dark-navy page, or a split hero over a card grid.",
+      "**Don't** add shadows beyond the slip lift; use the double frame.",
+      "**Don't** set the Bodoni \"+\" at figure sizes."
+    ]
+  }
+}
